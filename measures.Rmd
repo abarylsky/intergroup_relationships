@@ -19,10 +19,29 @@ data("Goldberg_gav")
 
 Goldberg_gav_sm <- Goldberg_gav %>%
   select(ID,
+         Partner,
+         group,
+         ChildAge,
+         chgend,
+         gendexp,
+         gender,
+         sexor,
+         contains("chrace"),
+         religion,
+         howrelig,
+         contains("otherch"),
+         occup,
+         contains("otherwork"),
+         educ,
+         faminc,
+         contains("polit"),
+         contains("gayaff"),
+         cityst,
          contains("genderparent"),
          sexor,
-         h14Orient,
-         contains("ace"),
+         contains("myrace"),
+         contains("h12"),
+         contains("w12"),
          h12social,
          h12selfdir,
          h12conform,
@@ -32,6 +51,23 @@ Goldberg_gav_sm <- Goldberg_gav %>%
          Emotional
          )
 
-var_labels <- map(Goldberg_gav, attr, "label")
+
+var_labels <- data.frame(column_name = colnames(Goldberg_gav),
+                         variable_label = sjlabelled::get_label(Goldberg_gav))
+```
+
+```{r}
+write_tsv(var_labels, "clipboard-5000")
+```
+
+
+```{r subset_data}
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  filter(!is.na(SocComp) & !is.na(Prosocial) & !is.na(Emotional) & !is.na(h12social) & !is.na(h12selfdir) & !is.na(h12conform))
+```
+
+
+```{r}
+"h12social"        "h12selfdir"       "h12conform"
 ```
 
