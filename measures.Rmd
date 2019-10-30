@@ -16,6 +16,8 @@ data("Goldberg_gav")
 ```
 
 ```{r variables}
+var_labels <- data.frame(column_name = colnames(Goldberg_gav),
+                         variable_label = sjlabelled::get_label(Goldberg_gav))
 
 Goldberg_gav_sm <- Goldberg_gav %>%
   select(ID,
@@ -51,23 +53,77 @@ Goldberg_gav_sm <- Goldberg_gav %>%
          Emotional
          )
 
-
-var_labels <- data.frame(column_name = colnames(Goldberg_gav),
-                         variable_label = sjlabelled::get_label(Goldberg_gav))
 ```
-
-```{r}
-write_tsv(var_labels, "clipboard-5000")
-```
-
 
 ```{r subset_data}
+#exclude individuals who do not have data for parental values or social competence
+Goldberg_gav_completes <- Goldberg_gav_sm %>%
+  filter(!is.na(SocComp) & !is.na(Prosocial) & !is.na(Emotional) & !is.na(h12social) & !is.na(h12selfdir) & !is.na(h12conform)) %>%
+  group_by(ID) %>%
+  count() %>%
+  filter(n == 2)
+
 Goldberg_gav_sm <- Goldberg_gav_sm %>%
-  filter(!is.na(SocComp) & !is.na(Prosocial) & !is.na(Emotional) & !is.na(h12social) & !is.na(h12selfdir) & !is.na(h12conform))
+  inner_join(Goldberg_gav_completes, by = "ID")
+
+Goldberg_gav_groups <- Goldberg_gav_sm %>%
+  filter(Partner == 2) %>%
+  group_by(group) %>%
+  count()
+```
+
+```{r}
+View(Goldberg_gav_sm %>% select(ID, Partner, group, h12social, h12selfdir, h12conform, SocComp, Prosocial, Emotional))
+```
+
+```{r}
+Goldberg_gav_sm %>%
+  group_by(gender) %>%
+  count()
+
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  mutate(gender = ifelse(gender == 3, 1, gender))
+
+Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
+
+Goldberg_gav_sm %>%
+  group_by(gender) %>%
+  count()
+  
+```
+
+```{r write_csv}
+write_csv(Goldberg_gav_sm, "C:/Users/livin/Documents/Smith Senior Year/Intergroup Relationships/Research Project/Goldberg_gav_sm.csv")
 ```
 
 
+# Correlation Matrix
+
 ```{r}
-"h12social"        "h12selfdir"       "h12conform"
+lesbians <- Goldberg_gav_sm %>%
+  filter(group == 1)
+
+gays <- Goldberg_gav_sm %>%
+  filter(group == 2)
+
+straight_men <- Goldberg_gav_sm %>%
+  filter(group == 3 & gender == 2)
+
+straight_women <- Goldberg_gav_sm %>%
+  filter(group == 3 & gender == 1)
+```
+
+```{r}
+
+mean(lesbians$SocComp)
+mean(gays$SocComp)
+mean(straight_men$SocComp)
+mean(straight_women$SocComp)
+
+mean(lesbians$h12conform)
+mean(gays$h12conform)
+mean(straight_men$h12conform)
+mean(straight_women$h12conform)
+
 ```
 
