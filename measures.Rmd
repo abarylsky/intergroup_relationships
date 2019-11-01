@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(psysds364data)
 library(tidyverse)
+library(sjlabelled)
 data("Goldberg_gav")
 ```
 
@@ -28,6 +29,7 @@ Goldberg_gav_sm <- Goldberg_gav %>%
          gendexp,
          gender,
          sexor,
+         w11RelDur,
          contains("chrace"),
          religion,
          howrelig,
@@ -36,6 +38,7 @@ Goldberg_gav_sm <- Goldberg_gav %>%
          contains("otherwork"),
          educ,
          faminc,
+         paraccme_5,
          contains("polit"),
          contains("gayaff"),
          cityst,
@@ -72,9 +75,7 @@ Goldberg_gav_groups <- Goldberg_gav_sm %>%
   count()
 ```
 
-```{r}
-View(Goldberg_gav_sm %>% select(ID, Partner, group, h12social, h12selfdir, h12conform, SocComp, Prosocial, Emotional))
-```
+
 
 ```{r}
 Goldberg_gav_sm %>%
@@ -89,11 +90,15 @@ Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
 Goldberg_gav_sm %>%
   group_by(gender) %>%
   count()
+
+#impute ID 231 partner 2's relationship duration
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  mutate(w11RelDur = ifelse(ID == 231 & Partner == 2, 7.0, w11RelDur))
   
 ```
 
 ```{r write_csv}
-write_csv(Goldberg_gav_sm, "C:/Users/livin/Documents/Smith Senior Year/Intergroup Relationships/Research Project/Goldberg_gav_sm.csv")
+#write_csv(Goldberg_gav_sm, "C:/Users/livin/Documents/Smith Senior Year/Intergroup Relationships/Research Project/Goldberg_gav_sm.csv")
 ```
 
 
@@ -125,5 +130,112 @@ mean(gays$h12conform)
 mean(straight_men$h12conform)
 mean(straight_women$h12conform)
 
+```
+
+```{r restructuring}
+# dyads <- Goldberg_gav_sm %>%
+#   mutate(Partner = case_when(Partner == 1 ~ "A",
+#                              Partner == 2 ~ "B")) %>%
+#   gather(variable, value, group:n) %>%
+#   unite(var_partner, variable, Partner) %>%
+#   spread(var_partner, value)
+# 
+# small_dyad <- small %>%
+#   mutate(gender = case_when(gender == -1 ~ "W",
+#                             gender == 1 ~ "H")) %>%
+#   select(-person) %>%
+#   gather(variable, value, self1:self4)%>%
+#   unite(var_gender, variable, gender) %>%
+#   spread(var_gender, value) 
+
+```
+
+
+Report basic demographics for the sample. That is, percentages of gender,
+percentages of racial groups, participant age, major, income, age of children,
+adoption type, etc. This depends, of course, on what you have in your data. 
+
+```{r demographics} 
+Goldberg_gav_sm$myrace_1[is.na(Goldberg_gav_sm$myrace_1)] <- 0
+Goldberg_gav_sm$myrace_2[is.na(Goldberg_gav_sm$myrace_2)] <- 0
+Goldberg_gav_sm$myrace_3[is.na(Goldberg_gav_sm$myrace_3)] <- 0
+Goldberg_gav_sm$myrace_4[is.na(Goldberg_gav_sm$myrace_4)] <- 0
+Goldberg_gav_sm$myrace_5[is.na(Goldberg_gav_sm$myrace_5)] <- 0
+Goldberg_gav_sm$myrace_6[is.na(Goldberg_gav_sm$myrace_6)] <- 0
+Goldberg_gav_sm$myrace_7[is.na(Goldberg_gav_sm$myrace_7)] <- 0
+
+race <- Goldberg_gav_sm %>%
+  select(contains("myrace"))
+
+colSums(race)
+
+race <- data.frame(column_name = colnames(race),
+                   variable_label = get_label(race),
+                   num_participants = colSums(race))
+
+race <- race %>%
+  mutate(perc_participants = (num_participants / 178) * 100)
+
+#find level of education of participants
+education <- Goldberg_gav_sm %>%
+  group_by(educ) %>%
+  count()
+
+ed_labels <- data.frame(get_labels(Goldberg_gav_sm$educ))
+data.table::setDT(ed_labels, keep.rownames = TRUE)[]
+ed_labels$rn <- as.numeric(ed_labels$rn)
+
+education <- education %>%
+  left_join(ed_labels, by = c("educ" = "rn"))
+
+names(education) <- c("educ", "num_participants", "level")
+education <- education %>%
+  mutate(perc_participants = (num_participants / 178) * 100)
+
+#average relationship length
+mean(lesbians$w11RelDur)
+mean(gays$w11RelDur)
+mean(straight_women$w11RelDur)
+mean(straight_men$w11RelDur)
+
+#sexual orientation
+sexual_orientation <- Goldberg_gav_sm %>%
+  select(ID, Partner, sexor, group) %>%
+  group_by(sexor) %>%
+  count()
+
+sexor_labels <- data.frame(variable_label =
+                           get_labels(Goldberg_gav_sm$sexor))
+data.table::setDT(sexor_labels, keep.rownames = TRUE)[]
+sexor_labels$rn <- as.numeric(sexor_labels$rn)
+sexual_orientation <- sexual_orientation %>%
+  left_join(sexor_labels, by = c("sexor" = "rn"))
+
+#parent's age
+parent_age <- Goldberg_gav_sm %>%
+  select(ID, Partner, group, paraccme_5) %>%
+  group_by(paraccme_5) %>%
+  count()
+
+
+```
+
+```{r}
+count_labels <- function(data, x) {
+  counts <- data %>%
+    select_(x) %>%
+    group_by_(x) %>%
+    count_()
+  labels <- tibble(variable_label = 
+                     get_labels(data[[x]]))
+  data.table::setDT(labels, keep.rownames = TRUE)[]
+  labels$rn <- as.numeric(labels[,rn])
+  x_bins <- counts %>%
+    left_join(labels, by = c("x" = "rn"))
+}
+```
+
+```{r}
+count_labels(Goldberg_gav_sm, "paraccme_5")
 ```
 
