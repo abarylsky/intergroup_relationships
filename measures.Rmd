@@ -9,7 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r load_data}
 library(psysds364data)
 library(tidyverse)
 library(sjlabelled)
@@ -60,19 +60,18 @@ Goldberg_gav_sm <- Goldberg_gav %>%
 
 ```{r subset_data}
 #exclude individuals who do not have data for parental values or social competence
+
+#find the subset of dyads who have information for both people for all of the variables
 Goldberg_gav_completes <- Goldberg_gav_sm %>%
   filter(!is.na(SocComp) & !is.na(Prosocial) & !is.na(Emotional) & !is.na(h12social) & !is.na(h12selfdir) & !is.na(h12conform)) %>%
   group_by(ID) %>%
   count() %>%
   filter(n == 2)
 
+#join this subset with the full set of individuals
 Goldberg_gav_sm <- Goldberg_gav_sm %>%
   inner_join(Goldberg_gav_completes, by = "ID")
 
-Goldberg_gav_groups <- Goldberg_gav_sm %>%
-  filter(Partner == 2) %>%
-  group_by(group) %>%
-  count()
 ```
 
 
@@ -102,9 +101,7 @@ Goldberg_gav_sm <- Goldberg_gav_sm %>%
 ```
 
 
-# Correlation Matrix
-
-```{r}
+```{r subset_by_group}
 lesbians <- Goldberg_gav_sm %>%
   filter(group == 1)
 
@@ -118,7 +115,7 @@ straight_women <- Goldberg_gav_sm %>%
   filter(group == 3 & gender == 1)
 ```
 
-```{r}
+```{r averages}
 
 mean(lesbians$SocComp)
 mean(gays$SocComp)
@@ -156,6 +153,14 @@ percentages of racial groups, participant age, major, income, age of children,
 adoption type, etc. This depends, of course, on what you have in your data. 
 
 ```{r demographics} 
+
+#count how many dyads in each group type
+Goldberg_gav_groups <- Goldberg_gav_sm %>%
+  filter(Partner == 2) %>%
+  group_by(group) %>%
+  count()
+
+#count how many people of each race
 Goldberg_gav_sm$myrace_1[is.na(Goldberg_gav_sm$myrace_1)] <- 0
 Goldberg_gav_sm$myrace_2[is.na(Goldberg_gav_sm$myrace_2)] <- 0
 Goldberg_gav_sm$myrace_3[is.na(Goldberg_gav_sm$myrace_3)] <- 0
@@ -220,8 +225,10 @@ parent_age <- Goldberg_gav_sm %>%
 
 ```
 
-```{r}
-count_labels <- function(data, x) {
+```{r counts_labels}
+counts_labels <- function(data, x) {
+  #if factor convert to numeric
+  dims <- dim(data)
   counts <- data %>%
     select_(x) %>%
     group_by_(x) %>%
@@ -230,12 +237,47 @@ count_labels <- function(data, x) {
                      get_labels(data[[x]]))
   data.table::setDT(labels, keep.rownames = TRUE)[]
   labels$rn <- as.numeric(labels[,rn])
+  names(counts)[1] <- "x"
   x_bins <- counts %>%
-    left_join(labels, by = c("x" = "rn"))
+    right_join(labels, by = c("x" = "rn"))
+  names(x_bins)[1] <- c(x, "n", "variable_label")
+  x_bins[["n"]][is.na(x_bins[["n"]])] <- 0
+  x_bins <- x_bins %>%
+    mutate(percent = (n / dims[[1]]) * 100)
+  x_bins <- x_bins %>%
+    select(1, variable_label, everything())
+  return(x_bins)
 }
 ```
 
-```{r}
-count_labels(Goldberg_gav_sm, "paraccme_5")
+```{r implement_counts_labels}
+education_counts <- counts_labels(Goldberg_gav_sm, "educ")
+sexor_counts <- counts_labels(Goldberg_gav_sm, "sexor")
+#income_counts <- counts_labels(Goldberg_gav_sm, "faminc")
+```
+
+```{r faminc}
+income <- skim(Goldberg_gav_sm$faminc)
+#127 missings
+#51 completes
+# mean = 175327.5
+#Q1 100000.0
+#Q2 167000.0
+#Q3 205000.0
+#Q4 565000.0
+
+childage_at_adoption <- skim(Goldberg_gav_sm$h12Age)
+#THIS VARIABLE IS IN MONTHS
+#mean = 	10.03
+# sd = 23.45
+# Q3 = 7, max = 144
+```
+
+```{r correlations}
+corr.test(gays %>% select(SocComp, Prosocial, Emotional, h12social, h12selfdir, h12conform))
+corr.test(lesbians %>% select(SocComp, Prosocial, Emotional, h12social, h12selfdir, h12conform))
+corr.test(Goldberg_gav_sm %>% select(SocComp, Prosocial, Emotional, h12social, h12selfdir, h12conform))
+corr.test(straight_women %>% select(SocComp, Prosocial, Emotional, h12social, h12selfdir, h12conform))
+corr.test(straight_men %>% select(SocComp, Prosocial, Emotional, h12social, h12selfdir, h12conform))
 ```
 
