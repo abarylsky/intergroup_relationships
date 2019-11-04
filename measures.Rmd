@@ -83,10 +83,7 @@ Goldberg_gav_sm %>%
   group_by(gender) %>%
   count()
 
-Goldberg_gav_sm <- Goldberg_gav_sm %>%
-  mutate(gender = ifelse((gender == "NA" & (ID == 1 | ID == 3)), 1, gender))
 
-Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
 
 Goldberg_gav_sm %>%
   group_by(gender) %>%
@@ -258,6 +255,8 @@ sexor_counts <- counts_labels(Goldberg_gav_sm, "sexor")
 #income_counts <- counts_labels(Goldberg_gav_sm, "faminc")
 
 race_child <- counts_labels(Goldberg_gav_sm, "w12Race")
+sjlabelled::get_label(Goldberg_gav_sm$paraccme_5)
+counts_age <- counts_labels(Goldberg_gav_sm, "paraccme_5")
 ```
 
 ```{r faminc}

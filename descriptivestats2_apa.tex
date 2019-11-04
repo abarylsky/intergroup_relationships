@@ -1,5 +1,3 @@
-
-
 \documentclass[man]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -25,8 +23,8 @@
 }{}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Measures and Preliminary Analyses},
-            pdfauthor={Alina Barylsky, Gav Bell, Emma Livingston, \& Paige Salters},
+            pdftitle={The title},
+            pdfauthor={First Author~\& Ernst-August Doelle},
             pdfkeywords={keywords},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -65,15 +63,15 @@
 \def\footnote{\protect\rmarkdownfootnote}
 
 
-  \title{Measures and Preliminary Analyses}
-    \author{Alina Barylsky, Gav Bell, Emma Livingston, \& Paige Salters}
+  \title{The title}
+    \author{First Author\textsuperscript{1}~\& Ernst-August Doelle\textsuperscript{1,2}}
     \date{}
   
-\shorttitle{SHORTTITLE}
+\shorttitle{Title}
 \affiliation{
 \vspace{0.5cm}
-}
-\keywords{keywords}
+\textsuperscript{1} Wilhelm-Wundt-University\\\textsuperscript{2} Konstanz Business School}
+\keywords{keywords\newline\indent Word count: X}
 \usepackage{csquotes}
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -100,32 +98,75 @@
 \makeatletter
 \renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
 \makeatother
+\usepackage{lineno}
+
+\linenumbers
+
+\authornote{
+
+Correspondence concerning this article should be addressed to First Author, Postal address. E-mail: \href{mailto:my@email.com}{\nolinkurl{my@email.com}}}
+
+\abstract{
+
+}
 
 \begin{document}
 \maketitle
 
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
+\begin{verbatim}
+## Warning: select_() is deprecated. 
+## Please use select() instead
+## 
+## The 'programming' vignette or the tidyeval book can help you
+## to program with select() : https://tidyeval.tidyverse.org
+## This warning is displayed once per session.
+\end{verbatim}
 
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.
+\begin{verbatim}
+## Warning: group_by_() is deprecated. 
+## Please use group_by() instead
+## 
+## The 'programming' vignette or the tidyeval book can help you
+## to program with group_by() : https://tidyeval.tidyverse.org
+## This warning is displayed once per session.
+\end{verbatim}
 
-\hypertarget{preliminary-analyses}{%
-\section{Preliminary Analyses}\label{preliminary-analyses}}
+\begin{verbatim}
+## Warning: count_() is deprecated. 
+## Please use count() instead
+## 
+## The 'programming' vignette or the tidyeval book can help you
+## to program with count() : https://tidyeval.tidyverse.org
+## This warning is displayed once per session.
+\end{verbatim}
 
-Report basic demographics for the sample. That is, percentages of gender,
-percentages of racial groups, participant age, major, income, age of children,
-adoption type, etc. This depends, of course, on what you have in your data.
+\begin{verbatim}
+## Warning: Column `x`/`rn` has different attributes on LHS and RHS of join
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in names(x_bins)[1] <- c(x, "n", "variable_label"): number of items
+## to replace is not a multiple of replacement length
+\end{verbatim}
 
 The current sample includes 178 participants and 89, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
 
 Out of the 178 participants, 95 are female and 83 are male. In this subset of participants,
-41.57\% (n = 74) identify as Exclusively gay/lesbian/homosexual,\\
-10.67\% (n = 19) identify as Mostly gay/lesbian/homosexual,
-5.62\% (n = 10) identify as Bisexual,\\
-1.69\% (n = 3) identify as Mostly heterosexual,
-37.08\% (n = 66) identify as Exclusively heterosexual,
-1.69\% (n = 3) identify as Queer, and
-1.12\% (n = 2) identify as Pansexual.
+42\% (n = 74) identify as \enquote{Exclusively gay/lesbian/homosexual},
+11\% (n = 19) identify as \enquote{Mostly gay/lesbian/homosexual},
+6\% (n = 10) identify as \enquote{Bisexual},
+2\% (n = 3) identify as \enquote{Mostly heterosexual},
+37\% (n = 66) identify as \enquote{Exclusively heterosexual},
+2\% (n = 3) identify as \enquote{Queer}, and
+1\% (n = 2) identify as \enquote{Pansexual}.
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender     n
+##    <dbl> <int>
+## 1      1    95
+## 2      2    83
+\end{verbatim}
 
 \newpage
 

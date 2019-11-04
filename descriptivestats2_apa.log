@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.10.4)  4 NOV 2019 15:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.10.4)  4 NOV 2019 15:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**measures_descriptivestats_apa.tex
-(./measures_descriptivestats_apa.tex
+**descriptivestats2_apa.tex
+(./descriptivestats2_apa.tex
 LaTeX2e <2018-12-01>
 (c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/apa6/apa6.cls
 Document Class: apa6 2018/09/01 v2.33 APA formatting (6th edition)
@@ -597,14 +597,14 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip68
 )
-Package hyperref Info: Option `unicode' set `true' on input line 32.
+Package hyperref Info: Option `unicode' set `true' on input line 30.
 
 (c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2019/09/12 v6.88i Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 32.
+Package hyperref Info: Option `breaklinks' set `true' on input line 30.
 
 (c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/grffile.s
 ty
@@ -708,35 +708,57 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \TPTL@width=\skip77
 )
 \longtablewidth=\skip78
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count139
+\output=\toks28
+\linenoprevgraf=\count140
+\linenumbersep=\dimen155
+\linenumberwidth=\dimen156
+\c@linenumber=\count141
+\c@pagewiselinenumber=\count142
+\c@LN@truepage=\count143
+\c@internallinenumber=\count144
+\c@internallinenumbers=\count145
+\quotelinenumbersep=\dimen157
+\bframerule=\dimen158
+\bframesep=\dimen159
+\bframebox=\box37
+
+LaTeX Warning: Command \@parboxrestore  has changed.
+               Check if current package is valid.
+
+LaTeX Info: Redefining \\ on input line 3056.
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
-(./measures_descriptivestats_apa.aux)
-\openout1 = `measures_descriptivestats_apa.aux'.
+(./descriptivestats2_apa.aux)
+\openout1 = `descriptivestats2_apa.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 104.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 113.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 113.
 
 (c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
-LaTeX Font Info:    ... okay on input line 104.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 104.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 113.
 (c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -808,8 +830,8 @@ sty
 Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring OFF on input line 104.
+\AtBeginShipoutBox=\box38
+Package hyperref Info: Link coloring OFF on input line 113.
 
 (c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -819,34 +841,102 @@ Package: nameref 2019/09/12 v2.45 Cross-referencing by name of section
 estring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count139
+\c@section@level=\count146
 )
-LaTeX Info: Redefining \ref on input line 104.
-LaTeX Info: Redefining \pageref on input line 104.
-LaTeX Info: Redefining \nameref on input line 104.
-(./measures_descriptivestats_apa.out) (./measures_descriptivestats_apa.out)
+LaTeX Info: Redefining \ref on input line 113.
+LaTeX Info: Redefining \pageref on input line 113.
+LaTeX Info: Redefining \nameref on input line 113.
+(./descriptivestats2_apa.out) (./descriptivestats2_apa.out)
 \@outlinefile=\write5
-\openout5 = `measures_descriptivestats_apa.out'.
+\openout5 = `descriptivestats2_apa.out'.
 
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 115.
 
-Class apa6 Warning: Abstract not defined.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 115.
 
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 115.
 
-! LaTeX Error: There's no line here to end.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 115
+.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 115
+.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 115.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 115.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 115.
+LaTeX Font Info:    Try loading font information for U+msa on input line 115.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 115.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1{c:/Users/livin/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/p
+dftex.map}
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.106 
-       
+] [2]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 116.
+
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 123
+.
+(c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Overfull \hbox (11.89522pt too wide) in paragraph at lines 150--150
+[]\T1/lmtt/m/n/12 ## Warning in names(x_bins)[1] <- c(x, "n", "variable_label")
+: number of items[] 
+ []
+
+[3] [4] AED endfloat: Processing end Figures and Tables [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 185.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 185.
+(./descriptivestats2_apa.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 185.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 185.
+Package rerunfilecheck Info: File `descriptivestats2_apa.out' has not changed.
+(rerunfilecheck)             Checksum: 6299B90E25719851C988300686E17F11;270.
+ ) 
 Here is how much of TeX's memory you used:
- 13076 strings out of 494553
- 190827 string characters out of 6175971
- 269701 words of memory out of 5000000
- 16591 multiletter control sequences out of 15000+600000
- 7701 words of font info for 17 fonts, out of 8000000 for 9000
+ 13535 strings out of 494553
+ 198762 string characters out of 6175971
+ 277010 words of memory out of 5000000
+ 16976 multiletter control sequences out of 15000+600000
+ 48247 words of font info for 52 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 43i,1n,47p,816b,272s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,10n,47p,808b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
+nc}{c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1
+.enc}<c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/l
+mbx12.pfb><c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public
+/lm/lmr12.pfb><c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmr8.pfb><c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
+/public/lm/lmri12.pfb><c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fonts/
+type1/public/lm/lmss8.pfb><c:/Users/livin/AppData/Roaming/TinyTeX/texmf-dist/fo
+nts/type1/public/lm/lmtt12.pfb>
+Output written on descriptivestats2_apa.pdf (5 pages, 133462 bytes).
+PDF statistics:
+ 75 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-!  ==> Fatal error occurred, no output PDF file produced!
