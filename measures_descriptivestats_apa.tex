@@ -1,0 +1,485 @@
+
+
+\documentclass[man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Measures and Preliminary Analyses},
+            pdfauthor={Alina Barylsky, Gav Bell, Emma Livingston, \& Paige Salters},
+            pdfkeywords={keywords},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{Measures and Preliminary Analyses}
+    \author{Alina Barylsky, Gav Bell, Emma Livingston, \& Paige Salters}
+    \date{}
+  
+\shorttitle{SHORTTITLE}
+\affiliation{
+\vspace{0.5cm}
+}
+\keywords{keywords\newline\indent Word count: X}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
+
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.
+
+\hypertarget{preliminary-analyses}{%
+\section{Preliminary Analyses}\label{preliminary-analyses}}
+
+\begin{verbatim}
+## # A tibble: 4 x 2
+## # Groups:   gender [4]
+##                 gender     n
+##              <dbl+lbl> <int>
+## 1  1 [Female]             93
+## 2  2 [Male]               83
+## 3  3 [Something else:]     1
+## 4 NA                       1
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+## # Groups:   gender [2]
+##   gender     n
+##    <dbl> <int>
+## 1      1    95
+## 2      2    83
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2.208838
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2.382734
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2.190693
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2.297619
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 23.7
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 22.14583
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 21.8
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 23.62857
+\end{verbatim}
+
+Report basic demographics for the sample. That is, percentages of gender,
+percentages of racial groups, participant age, major, income, age of children,
+adoption type, etc. This depends, of course, on what you have in your data.
+
+\begin{verbatim}
+## myrace_1 myrace_2 myrace_3 myrace_4 myrace_5 myrace_6 myrace_7 
+##        5        1        9        3        1      165        4
+\end{verbatim}
+
+\begin{verbatim}
+##    rn      get_labels.Goldberg_gav_sm.educ.
+## 1:  1       Less than a High School Diploma
+## 2:  2            High School Diploma or GED
+## 3:  3 Some college or an Associate's Degree
+## 4:  4           College (bachelor's) degree
+## 5:  5                       Master's degree
+## 6:  6                             PhD/JD/MD
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `educ`/`rn` has different attributes on LHS and RHS of join
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 7.916667
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 7.895833
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 8.428571
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 8.7
+\end{verbatim}
+
+\begin{verbatim}
+##    rn                     variable_label
+## 1:  1 Exclusively gay/lesbian/homosexual
+## 2:  2      Mostly gay/lesbian/homosexual
+## 3:  3                           Bisexual
+## 4:  4                Mostly heterosexual
+## 5:  5           Exclusively heterosexual
+## 6:  6                              Queer
+## 7:  7                          Pansexual
+## 8:  8                    Something else:
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `sexor`/`rn` has different attributes on LHS and RHS of
+## join
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: select_() is deprecated. 
+## Please use select() instead
+## 
+## The 'programming' vignette or the tidyeval book can help you
+## to program with select() : https://tidyeval.tidyverse.org
+## This warning is displayed once per session.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: group_by_() is deprecated. 
+## Please use group_by() instead
+## 
+## The 'programming' vignette or the tidyeval book can help you
+## to program with group_by() : https://tidyeval.tidyverse.org
+## This warning is displayed once per session.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: count_() is deprecated. 
+## Please use count() instead
+## 
+## The 'programming' vignette or the tidyeval book can help you
+## to program with count() : https://tidyeval.tidyverse.org
+## This warning is displayed once per session.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `x`/`rn` has different attributes on LHS and RHS of join
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in names(x_bins)[1] <- c(x, "n", "variable_label"): number of items
+## to replace is not a multiple of replacement length
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `x`/`rn` has different attributes on LHS and RHS of join
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in names(x_bins)[1] <- c(x, "n", "variable_label"): number of items
+## to replace is not a multiple of replacement length
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Column `x`/`rn` has different attributes on LHS and RHS of join
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in names(x_bins)[1] <- c(x, "n", "variable_label"): number of items
+## to replace is not a multiple of replacement length
+\end{verbatim}
+
+\begin{verbatim}
+## Call:corr.test(x = gays %>% select(SocComp, Prosocial, Emotional, 
+##     h12social, h12selfdir, h12conform))
+## Correlation matrix 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       1.00      0.93      0.95      0.10      -0.06       0.31
+## Prosocial     0.93      1.00      0.76      0.04      -0.07       0.36
+## Emotional     0.95      0.76      1.00      0.15      -0.05       0.22
+## h12social     0.10      0.04      0.15      1.00      -0.10       0.04
+## h12selfdir   -0.06     -0.07     -0.05     -0.10       1.00      -0.22
+## h12conform    0.31      0.36      0.22      0.04      -0.22       1.00
+## Sample Size 
+## [1] 48
+## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       0.00      0.00      0.00      1.00       1.00       0.37
+## Prosocial     0.00      0.00      0.00      1.00       1.00       0.15
+## Emotional     0.00      0.00      0.00      1.00       1.00       1.00
+## h12social     0.49      0.80      0.31      0.00       1.00       1.00
+## h12selfdir    0.66      0.61      0.75      0.49       0.00       1.00
+## h12conform    0.03      0.01      0.13      0.79       0.13       0.00
+## 
+##  To see confidence intervals of the correlations, print with the short=FALSE option
+\end{verbatim}
+
+\begin{verbatim}
+## Call:corr.test(x = lesbians %>% select(SocComp, Prosocial, Emotional, 
+##     h12social, h12selfdir, h12conform))
+## Correlation matrix 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       1.00      0.90      0.89      0.09      -0.01       0.19
+## Prosocial     0.90      1.00      0.60      0.11      -0.01       0.23
+## Emotional     0.89      0.60      1.00      0.04      -0.01       0.11
+## h12social     0.09      0.11      0.04      1.00      -0.33       0.07
+## h12selfdir   -0.01     -0.01     -0.01     -0.33       1.00      -0.17
+## h12conform    0.19      0.23      0.11      0.07      -0.17       1.00
+## Sample Size 
+## [1] 60
+## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       0.00      0.00      0.00      1.00       1.00       1.00
+## Prosocial     0.00      0.00      0.00      1.00       1.00       0.84
+## Emotional     0.00      0.00      0.00      1.00       1.00       1.00
+## h12social     0.52      0.42      0.73      0.00       0.12       1.00
+## h12selfdir    0.93      0.92      0.96      0.01       0.00       1.00
+## h12conform    0.14      0.08      0.40      0.61       0.19       0.00
+## 
+##  To see confidence intervals of the correlations, print with the short=FALSE option
+\end{verbatim}
+
+\begin{verbatim}
+## Call:corr.test(x = Goldberg_gav_sm %>% select(SocComp, Prosocial, 
+##     Emotional, h12social, h12selfdir, h12conform))
+## Correlation matrix 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       1.00      0.92      0.92      0.03       0.05       0.07
+## Prosocial     0.92      1.00      0.69      0.00       0.06       0.08
+## Emotional     0.92      0.69      1.00      0.06       0.03       0.05
+## h12social     0.03      0.00      0.06      1.00      -0.21       0.08
+## h12selfdir    0.05      0.06      0.03     -0.21       1.00      -0.05
+## h12conform    0.07      0.08      0.05      0.08      -0.05       1.00
+## Sample Size 
+## [1] 178
+## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       0.00      0.00      0.00      1.00       1.00          1
+## Prosocial     0.00      0.00      0.00      1.00       1.00          1
+## Emotional     0.00      0.00      0.00      1.00       1.00          1
+## h12social     0.69      0.96      0.42      0.00       0.06          1
+## h12selfdir    0.55      0.45      0.74      0.01       0.00          1
+## h12conform    0.35      0.29      0.52      0.30       0.50          0
+## 
+##  To see confidence intervals of the correlations, print with the short=FALSE option
+\end{verbatim}
+
+\begin{verbatim}
+## Call:corr.test(x = straight_women %>% select(SocComp, Prosocial, Emotional, 
+##     h12social, h12selfdir, h12conform))
+## Correlation matrix 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       1.00      0.92      0.92      0.04       0.03      -0.23
+## Prosocial     0.92      1.00      0.70     -0.04       0.11      -0.18
+## Emotional     0.92      0.70      1.00      0.12      -0.06      -0.24
+## h12social     0.04     -0.04      0.12      1.00      -0.22       0.16
+## h12selfdir    0.03      0.11     -0.06     -0.22       1.00      -0.03
+## h12conform   -0.23     -0.18     -0.24      0.16      -0.03       1.00
+## Sample Size 
+## [1] 35
+## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       0.00      0.00      0.00      1.00       1.00          1
+## Prosocial     0.00      0.00      0.00      1.00       1.00          1
+## Emotional     0.00      0.00      0.00      1.00       1.00          1
+## h12social     0.82      0.80      0.51      0.00       1.00          1
+## h12selfdir    0.88      0.51      0.73      0.20       0.00          1
+## h12conform    0.18      0.31      0.16      0.37       0.87          0
+## 
+##  To see confidence intervals of the correlations, print with the short=FALSE option
+\end{verbatim}
+
+\begin{verbatim}
+## Call:corr.test(x = straight_men %>% select(SocComp, Prosocial, Emotional, 
+##     h12social, h12selfdir, h12conform))
+## Correlation matrix 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       1.00      0.95      0.93     -0.23       0.28      -0.02
+## Prosocial     0.95      1.00      0.76     -0.27       0.26      -0.08
+## Emotional     0.93      0.76      1.00     -0.15       0.26       0.05
+## h12social    -0.23     -0.27     -0.15      1.00      -0.20       0.18
+## h12selfdir    0.28      0.26      0.26     -0.20       1.00       0.21
+## h12conform   -0.02     -0.08      0.05      0.18       0.21       1.00
+## Sample Size 
+## [1] 35
+## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+##            SocComp Prosocial Emotional h12social h12selfdir h12conform
+## SocComp       0.00      0.00      0.00      1.00       1.00          1
+## Prosocial     0.00      0.00      0.00      1.00       1.00          1
+## Emotional     0.00      0.00      0.00      1.00       1.00          1
+## h12social     0.19      0.12      0.40      0.00       1.00          1
+## h12selfdir    0.10      0.13      0.13      0.24       0.00          1
+## h12conform    0.90      0.63      0.76      0.29       0.24          0
+## 
+##  To see confidence intervals of the correlations, print with the short=FALSE option
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: The `names` must have length 7, not 6.
+## This warning is displayed once per session.
+\end{verbatim}
+
+\begin{tabular}{l|l|l|l|l|l|l}
+\hline
+Social Competence & Prosocial Competence & Emotional Competence & Social Values & Self-Direction Values & Conformity Values & NA\\
+\hline
+Social Competence & 1.00 & 0.9* & 0.89* & 0.09 & -0.01 & 0.19\\
+\hline
+Prosocial Competence & 0.93* & 1.00 & 0.60* & 0.11 & -0.01 & 0.23\\
+\hline
+Emotional Competence & 0.95* & 0.76* & 1.00 & 0.04 & -0.01 & 0.11\\
+\hline
+Social Values & 0.10 & 0.04 & 0.15 & 1.00 & -0.33* & 0.07\\
+\hline
+Self-Direction Values & -0.06 & -0.07 & -0.05 & -0.10 & 1.00 & -0.17\\
+\hline
+Conformity Values & 0.31* & 0.36* & 0.22 & 0.04 & -0.22 & 1.00\\
+\hline
+\end{tabular}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  filter(gays, Partner == 1)[["w11RelDur"]] and (filter(lesbians, Partner == 1)[["w11RelDur"]])
+## t = -0.11271, df = 46.306, p-value = 0.9107
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.380080  2.127625
+## sample estimates:
+## mean of x mean of y 
+##  7.760870  7.887097
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  straight_men$w11RelDur and filter(gays, Partner == 1)[["w11RelDur"]]
+## t = 0.84451, df = 47.126, p-value = 0.4027
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.297848  3.176109
+## sample estimates:
+## mean of x mean of y 
+##   8.70000   7.76087
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  straight_women$w11RelDur and filter(lesbians, Partner == 1)[["w11RelDur"]]
+## t = 0.52937, df = 63.941, p-value = 0.5984
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.501988  2.584937
+## sample estimates:
+## mean of x mean of y 
+##  8.428571  7.887097
+\end{verbatim}
+
+The current sample includes 178 participants and 89, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
+
+Out of the 178 participants, 95 are female and 83 are male. \% identify as , \% identify as , \% identify as , \% identify as , \% identify as , \% identify as , and \% identify as .
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+
+\endgroup
+
+
+\end{document}

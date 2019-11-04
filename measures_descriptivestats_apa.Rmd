@@ -1,15 +1,28 @@
 ---
-title: "Untitled"
-author: "Emma Livingston"
-date: "10/23/2019"
-output: pdf_document
+title: "Measures and Preliminary Analyses"
+author:
+- name: Alina Barylsky
+- name: Gav Bell
+- name: Emma Livingston
+- name: Paige Salters
+classoption: man
+output:
+  papaja::apa6_docx: default
+  papaja::apa6_pdf: default
+draft: no
+figurelist: no
+floatsintext: no
+footnotelist: no
+keywords: keywords
+linenumbers: no
+mask: no
+documentclass: apa6
+tablelist: no
+bibliography: r-references.bib
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r load_data}
+```{r setup, include = FALSE}
+library(papaja)
 library(psysds364data)
 library(tidyverse)
 library(sjlabelled)
@@ -17,6 +30,22 @@ library(psych)
 library(skimr)
 data("Goldberg_gav")
 ```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+knitr::opts_chunk$set(include = FALSE)
+options(tinytex.verbose = TRUE)
+```
+
+
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. 
+
+
+# Preliminary Analyses
 
 ```{r variables}
 var_labels <- data.frame(column_name = colnames(Goldberg_gav),
@@ -76,15 +105,13 @@ Goldberg_gav_sm <- Goldberg_gav_sm %>%
 
 ```
 
-
-
 ```{r}
 Goldberg_gav_sm %>%
   group_by(gender) %>%
   count()
 
 Goldberg_gav_sm <- Goldberg_gav_sm %>%
-  mutate(gender = ifelse((gender == "NA" & (ID == 1 | ID == 3)), 1, gender))
+  mutate(gender = ifelse(gender == 3, 1, gender))
 
 Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
 
@@ -97,11 +124,6 @@ Goldberg_gav_sm <- Goldberg_gav_sm %>%
   mutate(w11RelDur = ifelse(ID == 231 & Partner == 2, 7.0, w11RelDur))
   
 ```
-
-```{r write_csv}
-#write_csv(Goldberg_gav_sm, "C:/Users/livin/Documents/Smith Senior Year/Intergroup Relationships/Research Project/Goldberg_gav_sm.csv")
-```
-
 
 ```{r subset_by_group}
 lesbians <- Goldberg_gav_sm %>%
@@ -118,7 +140,6 @@ straight_women <- Goldberg_gav_sm %>%
 ```
 
 ```{r averages}
-
 mean(lesbians$SocComp)
 mean(gays$SocComp)
 mean(straight_men$SocComp)
@@ -181,7 +202,7 @@ race <- data.frame(column_name = colnames(race),
                    num_participants = colSums(race))
 
 race <- race %>%
-  mutate(perc_participants = (num_participants / 178) * 100)
+  mutate(perc_participants = round((num_participants / 178), digits = 4) * 100)
 
 #find level of education of participants
 education <- Goldberg_gav_sm %>%
@@ -245,11 +266,12 @@ counts_labels <- function(data, x) {
   names(x_bins)[1] <- c(x, "n", "variable_label")
   x_bins[["n"]][is.na(x_bins[["n"]])] <- 0
   x_bins <- x_bins %>%
-    mutate(percent = round((n / dims[[1]]) * 100))
+    mutate(percent = round((n / dims[[1]]), digits = 4) * 100)
   x_bins <- x_bins %>%
     select(1, variable_label, everything())
   return(x_bins)
 }
+
 ```
 
 ```{r implement_counts_labels}
@@ -303,7 +325,7 @@ knitr::kable(corr_matrix1)
 ```
 
 
-```{r}
+```{r relationship_ttest}
 t.test(filter(gays, Partner == 1)[["w11RelDur"]], (filter(lesbians, Partner == 1)[["w11RelDur"]]))
 
 t.test(straight_men$w11RelDur,filter(gays, Partner == 1)[["w11RelDur"]])
@@ -312,5 +334,24 @@ t.test(straight_women$w11RelDur,filter(lesbians, Partner == 1)[["w11RelDur"]])
   
 ```
 
+The current sample includes `r dim(Goldberg_gav_sm)[1]` participants and `r dim(Goldberg_gav_sm)[1] / 2`, including `r dim(lesbians)[1] / 2` female same-sex couples, `r dim(gays)[1] / 2` male same-sex couples, and `r dim(straight_women)[1]` heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
 
-Out of the `r dim(Goldberg_gav_sm)[1]` participants, `r dim(filter(Goldberg_gav_sm, gender == 1))[1]` are female and `r dim(filter(Goldberg_gav_sm, gender == 2))[1]` are male. `r sexor_counts[1, 4]`% identify as `r sexor_counts[1, 2]`, `r sexor_counts[2, 4]`% identify as `r sexor_counts[2, 2]`, `r sexor_counts[3, 4]`% identify as `r sexor_counts[3, 2]`, `r sexor_counts[4, 4]`% identify as `r sexor_counts[4, 2]`, `r sexor_counts[5, 4]`% identify as `r sexor_counts[5, 2]`, `r sexor_counts[6, 4]`% identify as `r sexor_counts[6, 2]`, and `r sexor_counts[7, 4]`% identify as `r sexor_counts[7, 2]`.
+Out of the `r dim(Goldberg_gav_sm)[1]` participants, `r dim(filter(Goldberg_gav_sm, gender == 1))[1]` are female and `r dim(filter(Goldberg_gav_sm, gender == 2))[1]` are male. In this subset of participants, `r pluck(sexor_counts, 1, 4)`% (n = `r pluck(sexor_counts, 1, 3]`) identify as `r pluck(sexor_counts, 1, 2)`,  `r pluck(sexor_counts, 2, 4)`% (n = `r pluck(sexor_counts, 2, 3]`) identify as `r pluck(sexor_counts, 2, 2)`, `r pluck(sexor_counts, 3, 4)`% (n = `r pluck(sexor_counts, 3, 3]`) identify as `r pluck(sexor_counts, 3, 2)`,  `r pluck(sexor_counts, 4, 4)`% (n = `r pluck(sexor_counts, 4, 3]`) identify as `r pluck(sexor_counts, 4, 2)`, `r pluck(sexor_counts, 5, 4)`% (n = `r pluck(sexor_counts, 5, 3]`) identify as `r pluck(sexor_counts, 5, 2)`,  `r pluck(sexor_counts, 6, 4)`% (n = `r pluck(sexor_counts, 6, 3]`) identify as `r pluck(sexor_counts, 6, 2)`, and `r pluck(sexor_counts, 7, 4)`% (n = `r pluck(sexor_counts, 7, 3]`) identify as `r pluck(sexor_counts, 7, 2)`. 
+
+fix race
+This sample is rather well educated: `r education_counts[1, 4]`% (n = `education_counts[1, 3]`) have "`r education_counts[1, 4]`", `r education_counts[2, 4]`% (n = `education_counts[2, 3]`) have a "`r education_counts[2, 4]`", `r education_counts[3, 4]`% (n = `education_counts[3, 3]`) have "`r education_counts[3, 4]`", `r education_counts[4, 4]`% (n = `education_counts[4, 3]`) have a "`r education_counts[4, 4]`", `r education_counts[5, 4]`% (n = `education_counts[5, 3]`) have a "`r education_counts[5, 4]`", and `r education_counts[6, 4]`% (n = `education_counts[6, 3]`) have a "`r education_counts[6, 4]`".
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
