@@ -284,21 +284,36 @@ corr.test(straight_women %>% select(SocComp, Prosocial, Emotional, h12social, h1
 corr.test(straight_men %>% select(SocComp, Prosocial, Emotional, h12social, h12selfdir, h12conform))
 ```
 
+
 ```{r}
 #Above the diagonal are lesbians, below the diagonal are gay males
-corr_matrix1 <- tibble(
-  c("Social Competence", "Prosocial Competence", "Emotional Competence", "Social Values", "Self-Direction Values", "Conformity Values"),
-  c("1.00", "0.93*", "0.95*", "0.10", "-0.06", "0.31*"),
-  c("0.9*", "1.00", "0.76*", "0.04", "-0.07", "0.36*"),
-  c("0.89*", "0.60*", "1.00", "0.15", "-0.05", "0.22"),
-  c("0.09", "0.11", "0.04", "1.00", "-0.10", "0.04"),
-  c("-0.01", "-0.01", "-0.01", "-0.33*", "1.00", "-0.22"),
-  c("0.19", "0.23", "0.11", "0.07", "-0.17", "1.00")
+corr_matrix1 <- tribble(
+  ~"", ~"Social Competence", ~"Prosocial Competence", ~"Emotional Competence", ~"Social Values", ~"Self-Direction Values", ~"Conformity Values",
+  "Social Competence",    "1.00",  "0.90*", "0.89*",  "0.09", "-0.01",  "0.19",
+  "Prosocial Competence", "0.93*",  "1.00",  "0.60*", "0.11", "-0.01",  "0.23",
+  "Emotional Competence", "0.95*", "0.76*",  "1.00",   "0.04", "-0.01",  "0.11",
+  "Social Values",      "0.10",   "0.04",  "0.15",   "1.00", "-0.33",   "0.07",
+  "Self-Direction Values","-0.06", "-0.07",  "0.05",  "-0.10",  "1.00", "-0.17",
+  "Conformity Values",    "0.31",  "0.36",  "0.22",    "0.04", "-0.22",   "1.00"
+  
 )
 
-names(corr_matrix1) <- c("Social Competence", "Prosocial Competence", "Emotional Competence", "Social Values", "Self-Direction Values", "Conformity Values")
+knitr::kable(corr_matrix1, caption = "Table 1: Correlations. Women in same-sex couples are above the diagonal, men in same-sex couples are below the diagonal.")
+```
 
-knitr::kable(corr_matrix1)
+```{r}
+#Above the diagonal are the straight women, below the diagonal are straight men
+corr_matrix2 <- tribble(
+  ~"", ~"Social Competence", ~"Prosocial Competence", ~"Emotional Competence", ~"Social Values", ~"Self-Direction Values", ~"Conformity Values",
+  "Social Competence",    "1.00",  "0.92*", "0.92*",  "0.04", "0.03",  "-0.23",
+  "Prosocial Competence", "0.95*",  "1.00",  "0.70*", "-0.04", "0.11",  "-0.18",
+  "Emotional Competence", "0.93*", "0.76*",  "1.00",   "0.12", "-0.06",  "-0.24",
+  "Social Values",      "-0.23",   "-0.27",  "-0.15",  "1.00", "-0.22",  "0.16",
+  "Self-Direction Values", "0.28", "0.26",    "0.26",  "-0.20",  "1.00",  "-0.03",
+  "Conformity Values",    "-0.02",  "-0.08", "0.05",    "0.18", "0.21",      "1.00"
+  
+ )
+knitr::kable(corr_matrix2, caption = "Table 2: Correlations. Women in heterosexual couples are above the diagonal, men in heterosexual couples are below the diagonal.")
 ```
 
 
@@ -313,3 +328,37 @@ t.test(straight_women$w11RelDur,filter(lesbians, Partner == 1)[["w11RelDur"]])
 
 
 Out of the `r dim(Goldberg_gav_sm)[1]` participants, `r dim(filter(Goldberg_gav_sm, gender == 1))[1]` are female and `r dim(filter(Goldberg_gav_sm, gender == 2))[1]` are male. `r sexor_counts[1, 4]`% identify as `r sexor_counts[1, 2]`, `r sexor_counts[2, 4]`% identify as `r sexor_counts[2, 2]`, `r sexor_counts[3, 4]`% identify as `r sexor_counts[3, 2]`, `r sexor_counts[4, 4]`% identify as `r sexor_counts[4, 2]`, `r sexor_counts[5, 4]`% identify as `r sexor_counts[5, 2]`, `r sexor_counts[6, 4]`% identify as `r sexor_counts[6, 2]`, and `r sexor_counts[7, 4]`% identify as `r sexor_counts[7, 2]`.
+
+
+```{r}
+t.test(gays$w11RelDur, lesbians$w11RelDur)
+t.test(gays$w11RelDur, straight_women$w11RelDur)
+t.test(gays$w11RelDur, straight_men$w11RelDur)
+t.test(lesbians$w11RelDur, straight_women$w11RelDur)
+t.test(lesbians$w11RelDur, straight_men$w11RelDur)
+t.test(straight_women$w11RelDur, straight_men$w11RelDur)
+
+rel_dur_model <- lm(w11RelDur ~ gender + group, data = Goldberg_gav_sm)
+summary(rel_dur_model)
+
+women_ed <- Goldberg_gav_sm %>%
+  filter(gender == 1) %>%
+  select(educ)
+men_ed <- Goldberg_gav_sm %>%
+  filter(gender == 2) %>%
+  select(educ)
+t.test(women_ed$educ, men_ed$educ)
+t.test(gays$educ, lesbians$educ)
+t.test(gays$educ, straight_women$educ)
+t.test(gays$educ, straight_men$educ)
+t.test(lesbians$educ, straight_women$educ)
+t.test(lesbians$educ, straight_men$educ)
+```
+
+```{r}
+education_counts <- counts_labels(Goldberg_gav_sm, "educ")
+```
+```{r}
+qplot(w12Age, data = Goldberg_gav_sm)
+```
+
