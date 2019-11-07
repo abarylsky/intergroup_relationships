@@ -149,24 +149,128 @@ Correspondence concerning this article should be addressed to First Author, Post
 ## to replace is not a multiple of replacement length
 \end{verbatim}
 
-The current sample includes 178 participants and 89, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
-
-Out of the 178 participants, 95 are female and 83 are male. In this subset of participants,
-42\% (n = 74) identify as \enquote{Exclusively gay/lesbian/homosexual},
-11\% (n = 19) identify as \enquote{Mostly gay/lesbian/homosexual},
-6\% (n = 10) identify as \enquote{Bisexual},
-2\% (n = 3) identify as \enquote{Mostly heterosexual},
-37\% (n = 66) identify as \enquote{Exclusively heterosexual},
-2\% (n = 3) identify as \enquote{Queer}, and
-1\% (n = 2) identify as \enquote{Pansexual}.
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = educ ~ gender + group, data = Goldberg_gav_sm)
+## 
+## Residuals:
+## <Labelled double>: education level
+##      Min       1Q   Median       3Q      Max 
+## -2.56508 -0.61260  0.20630  0.43492  1.43492 
+## 
+## Labels:
+##  value                                 label
+##      1       Less than a High School Diploma
+##      2            High School Diploma or GED
+##      3 Some college or an Associate's Degree
+##      4           College (bachelor's) degree
+##      5                       Master's degree
+##      6                             PhD/JD/MD
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  4.83223    0.24094  20.056   <2e-16 ***
+## gender      -0.18109    0.15545  -1.165    0.246    
+## group        0.04752    0.09082   0.523    0.601    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9435 on 173 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.007807,   Adjusted R-squared:  -0.003663 
+## F-statistic: 0.6806 on 2 and 173 DF,  p-value: 0.5076
+\end{verbatim}
 
 \begin{verbatim}
-## # A tibble: 2 x 2
-##   gender     n
-##    <dbl> <int>
-## 1      1    95
-## 2      2    83
+## 
+## Call:
+## lm(formula = educ ~ group + gender, data = Goldberg_gav_sm)
+## 
+## Residuals:
+## <Labelled double>: education level
+##      Min       1Q   Median       3Q      Max 
+## -2.56508 -0.61260  0.20630  0.43492  1.43492 
+## 
+## Labels:
+##  value                                 label
+##      1       Less than a High School Diploma
+##      2            High School Diploma or GED
+##      3 Some college or an Associate's Degree
+##      4           College (bachelor's) degree
+##      5                       Master's degree
+##      6                             PhD/JD/MD
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  4.83223    0.24094  20.056   <2e-16 ***
+## group        0.04752    0.09082   0.523    0.601    
+## gender      -0.18109    0.15545  -1.165    0.246    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9435 on 173 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.007807,   Adjusted R-squared:  -0.003663 
+## F-statistic: 0.6806 on 2 and 173 DF,  p-value: 0.5076
 \end{verbatim}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = h12Age ~ group + gender, data = Goldberg_gav_sm)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -14.390 -10.640  -6.215  -1.039 133.360 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)  18.1393     5.9085   3.070  0.00248 **
+## group        -4.4254     2.2346  -1.980  0.04923 * 
+## gender        0.6758     3.8198   0.177  0.85977   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 23.29 on 175 degrees of freedom
+## Multiple R-squared:  0.02439,    Adjusted R-squared:  0.01324 
+## F-statistic: 2.187 on 2 and 175 DF,  p-value: 0.1153
+\end{verbatim}
+
+\hypertarget{method}{%
+\section{Method}\label{method}}
+
+\hypertarget{participant-recruitment}{%
+\subsection{Participant Recruitment}\label{participant-recruitment}}
+
+The data come from a larger longitudinal study on the transition to parenthood. To be included, couples had to be first time parents and adopting their first child. Adoption agencies across the US were asked to provide study information to clients seeking to adopt. Effort was made to contact agencies in states that had a high percentage of same-sex couples. Over 30 agencies provided information to clients; interested clients contacted the principal investigator for participation details. Both same-sex and heterosexual couples were targeted through these agencies to facilitate similarity on income and geographic location. Organizations such as the Human Rights Campaign, a gay political organization, also disseminated study information.
+
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
+
+Both members of each couple were informed of the risks and benefits of the study, gave consent, and participated at pre-adoptive placement (Time 1 or T1) and 2 years post-adoptive placement (T2). At each phase, they were sent a packet of questionnaires to complete and they were interviewed over the phone. Interviews lasted 1-1.5 hours.
+
+\hypertarget{measures}{%
+\subsection{Measures}\label{measures}}
+
+\begin{verbatim}
+In the present study, we are investigating the Child Social Competence and Parental Values variables. Both are parental-report measures for which each partner in a dyad reported their perceptions of their own parental values and their child’s social competence. 
+\end{verbatim}
+
+The Child Social Competence measure (Conduct Problems Prevention Research Group, 1999) uses two subscales to assess different facets of socially competent behavior of children. It asks parents to rate the extent to which they believe statements describe their child on a 0-4 Likert scale ranging from \enquote{Not At All} to \enquote{Very Well.} The first subset consists of prosocial and communication skills, with items such as \enquote{Your child is very good at understanding other people's feelings,} and \enquote{Your child listens to others' points of view.} The second subset examines emotional regulation skills, such as \enquote{Your child can accept things not going his/her way,} and \enquote{Your child thinks before acting.} All 12 items of the Social Competence scale show significant reliability (alpha = 0.914). The Inter-class correlation for Social Competence shows that \textbf{\emph{find and interpret ICC here}}
+The Rank Order of Parental Values Scale (Kohn, 1977) orders self-directing (\enquote{to think for themselves}), conforming (\enquote{to be polite to adults}), and social (\enquote{to be kind to other children}) values in children. The scale is delivered to participants through three sets of five items, and there are a resulting 15 total items (6 self-directing, 6 conforming, 3 social). Parents rank each item on a five point Likert-scale from most important (1) to least important (5). Within the dataset, we only have access to the aggregate measures of each of the sets of items: self-direction, social, and conforming, but not the individual scores for each question. Each of these sets contain a different scale of scores, and thus we were unable to compute an alpha for internal validity. However this scale has been in use since the 1970s and is claimed to have consistent internal validity in many studies. It should be noted that the scale (Kohn, 1977) in its entirety was not found. However, sample items were referenced for use in this section, as well as \textbf{\emph{find and interpret ICC here }}
+
+\#Participant Demographics
+
+The current study includes 89 couples, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
+
+Out of the 178 participants, 95 are female and 83 are male. The sample was also mostly comprised of white participants (92\%, n = 165). Average relationship length across the sample was 8.16 years and did not differ significantly between gender and couple type, F(2, 174) = 0.413, p = 0.66.
+
+The majority of the sample was well-educated. 18\% (n = 32) had a professional degree (PhD, JD, or MD), 43\% (n = 77) had a master's degree, 25\% (n = 45) had a bachelor's degree, 11\% (n = 20) had an associates degree or some college, and 1\% (n = 2) had a high school diploma. The education level did not differ significantly between couple types or gender, F(2, 173) = 0.506, p = 0.60.
+
+Ninety-one percent of couples adopted infants under the age of 3 (n = 162), 6.74\% adopted children between the ages of 3 and 6 years old (n = 12), and 2.25\% adopted children between 7 and 16 years old (n = 4). Child age at the time of the data collection did not differ significantly between couple types or gender, F(2, 174) = 1.64, p = 0.197. In total, 80.9\% of couples adopted though public domestic adoption (n = 144), 2.2\% adopted through private domestic adoption (n = 4), and 16.85\% adopted internationally (n = 30).
+
+Correlations between key variables by couple type and gender are described in Table 1 and Table 2.
 
 \newpage
 

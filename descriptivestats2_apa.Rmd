@@ -37,12 +37,14 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library("papaja")
+options(tinytex.verbose = TRUE)
 ```
 
 ```{r analysis-preferences}
 # Seed for random number generation
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+library(papaja)
 library(psysds364data)
 library(tidyverse)
 library(sjlabelled)
@@ -161,10 +163,61 @@ sexor_counts <- counts_labels(Goldberg_gav_sm, "sexor")
 ```
 
 
-The current sample includes `r dim(Goldberg_gav_sm)[1]` participants and `r (dim(Goldberg_gav_sm)[1]) / 2`, including `r (dim(lesbians)[1]) / 2` female same-sex couples, `r (dim(gays)[1]) / 2` male same-sex couples, and `r dim(straight_women)[1]` heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
 
-Out of the `r dim(Goldberg_gav_sm)[1]` participants, `r dim(filter(Goldberg_gav_sm, gender == 1))[1]` are female and `r dim(filter(Goldberg_gav_sm, gender == 2))[1]` are male. In this subset of participants, `r pluck(sexor_counts, 4, 1)`% (n = `r pluck(sexor_counts, 3, 1)`) identify as "`r pluck(sexor_counts, 2, 1)`", `r pluck(sexor_counts, 4, 2)`% (n = `r pluck(sexor_counts, 3, 2)`) identify as "`r pluck(sexor_counts, 2, 2)`", `r pluck(sexor_counts, 4, 3)`% (n = `r pluck(sexor_counts, 3, 3)`) identify as "`r pluck(sexor_counts, 2, 3)`", `r pluck(sexor_counts, 4, 4)`% (n = `r pluck(sexor_counts, 3, 4)`) identify as "`r pluck(sexor_counts, 2, 4)`", `r pluck(sexor_counts, 4, 5)`% (n = `r pluck(sexor_counts, 3, 5)`) identify as "`r pluck(sexor_counts, 2, 5)`", `r pluck(sexor_counts, 4, 6)`% (n = `r pluck(sexor_counts, 3, 6)`) identify as "`r pluck(sexor_counts, 2, 6)`", and `r pluck(sexor_counts, 4, 7)`% (n = `r pluck(sexor_counts, 3, 7)`) identify as "`r pluck(sexor_counts, 2, 7)`".
+```{r kid_age}
+childage_at_adoption <- skim(Goldberg_gav_sm$h12Age)
 
+#under the age of 3
+infant_adoption <- Goldberg_gav_sm %>%
+  filter(Goldberg_gav_sm$h12Age < 36.00) %>%
+  count()
+
+#between 3 and 6
+little_child_adoption <- Goldberg_gav_sm %>%
+  filter(Goldberg_gav_sm$h12Age %in% (36.00:72.00)) #%>%
+  #count()
+
+#over the age of 7
+big_child_adoption <- Goldberg_gav_sm %>%
+  filter(Goldberg_gav_sm$h12Age > 72.00) #%>%
+  #count()
+
+summary(lm(formula =educ ~ gender + group, data = Goldberg_gav_sm))
+
+summary(lm(formula = educ ~ group + gender, data = Goldberg_gav_sm))
+
+summary(lm(formula = h12Age ~ group + gender, data = Goldberg_gav_sm))
+```
+
+# Method
+
+## Participant Recruitment
+
+The data come from a larger longitudinal study on the transition to parenthood. To be included, couples had to be first time parents and adopting their first child. Adoption agencies across the US were asked to provide study information to clients seeking to adopt. Effort was made to contact agencies in states that had a high percentage of same-sex couples. Over 30 agencies provided information to clients; interested clients contacted the principal investigator for participation details. Both same-sex and heterosexual couples were targeted through these agencies to facilitate similarity on income and geographic location. Organizations such as the Human Rights Campaign, a gay political organization, also disseminated study information.
+
+## Procedure
+
+Both members of each couple were informed of the risks and benefits of the study, gave consent, and participated at pre-adoptive placement (Time 1 or T1) and 2 years post-adoptive placement (T2). At each phase, they were sent a packet of questionnaires to complete and they were interviewed over the phone. Interviews lasted 1-1.5 hours.
+
+## Measures
+
+	In the present study, we are investigating the Child Social Competence and Parental Values variables. Both are parental-report measures for which each partner in a dyad reported their perceptions of their own parental values and their child’s social competence. 
+The Child Social Competence measure (Conduct Problems Prevention Research Group, 1999) uses two subscales to assess different facets of socially competent behavior of children. It asks parents to rate the extent to which they believe statements describe their child on a 0-4 Likert scale ranging from “Not At All” to “Very Well.” The first subset consists of prosocial and communication skills, with items such as  “Your child is very good at understanding other people’s feelings,” and   “Your child listens to others’ points of view.” The second subset examines emotional regulation skills, such as “Your child can accept things not going his/her way,” and “Your child thinks before acting.” All 12 items of the Social Competence scale show significant reliability (alpha = 0.914). The Inter-class correlation for Social Competence shows that ***find and interpret ICC here*** 
+The Rank Order of Parental Values Scale (Kohn, 1977) orders self-directing (“to think for themselves”), conforming (“to be polite to adults”), and social  (“to be kind to other children”) values in children. The scale is delivered to participants through three sets of five items, and there are a resulting 15 total items (6 self-directing, 6 conforming, 3 social). Parents rank each item on a five point Likert-scale from most important (1) to least important (5). Within the dataset, we only have access to the aggregate measures of each of the sets of items: self-direction, social, and conforming, but not the individual scores for each question. Each of these sets contain a different scale of scores, and thus we were unable to compute an alpha for internal validity. However this scale has been in use since the 1970s and is claimed to have consistent internal validity in many studies.  It should be noted that the scale (Kohn, 1977) in its entirety was not found. However, sample items were referenced for use in this section, as well as   ***find and interpret ICC here ***
+
+
+
+#Participant Demographics
+
+The current study includes 89 couples, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
+
+Out of the 178 participants, 95 are female and 83 are male. The sample was also mostly comprised of white participants (92%, n = 165). Average relationship length across the sample was 8.16 years and did not differ significantly between gender and couple type, F(2, 174) = 0.413, p  = 0.66.
+
+The majority of the sample was well-educated. 18% (n = 32) had a professional degree (PhD, JD, or MD), 43% (n = 77) had a master’s degree, 25% (n  = 45) had a bachelor’s degree, 11% (n = 20) had an associates degree or some college, and 1% (n = 2) had a high school diploma. The education level did not differ significantly between couple types or gender, F(2, 173) = 0.506, p = 0.60. 
+
+Ninety-one percent of couples adopted infants under the age of 3 (n = 162), 6.74% adopted children between the ages of 3 and 6 years old (n = 12), and 2.25% adopted children between 7 and 16 years old (n = 4). Child age at the time of the data collection did not differ significantly between couple types or gender, F(2, 174) = 1.64,  p = 0.197. In total, 80.9% of couples adopted though public domestic adoption (n = 144), 2.2% adopted through private domestic adoption (n = 4), and 16.85% adopted internationally (n = 30). 
+
+Correlations between key variables by couple type and gender are described in Table 1 and Table 2.
 
 
 
