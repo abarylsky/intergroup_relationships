@@ -1,0 +1,152 @@
+
+
+\documentclass[man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Measures and Descriptives Statistics},
+            pdfauthor={Alina Barylsky, Gav Bell, Emma Livingston, \& Paige Salters},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{Measures and Descriptives Statistics}
+    \author{Alina Barylsky\textsuperscript{1}, Gav Bell\textsuperscript{1}, Emma Livingston\textsuperscript{1}, \& Paige Salters\textsuperscript{1}}
+    \date{}
+  
+\shorttitle{Measures and Descriptive Statistics}
+\affiliation{
+\vspace{0.5cm}
+\textsuperscript{1} Smith College}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
+
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\hypertarget{method}{%
+\section{Method}\label{method}}
+
+\hypertarget{participant-recruitment}{%
+\subsection{Participant Recruitment}\label{participant-recruitment}}
+
+The data come from a larger longitudinal study on the transition to parenthood. To be included, couples had to be first time parents and adopting their first child. Adoption agencies across the US were asked to provide study information to clients seeking to adopt. Effort was made to contact agencies in states that had a high percentage of same-sex couples. Over 30 agencies provided information to clients; interested clients contacted the principal investigator for participation details. Both same-sex and heterosexual couples were targeted through these agencies to facilitate similarity on income and geographic location. Organizations such as the Human Rights Campaign, a gay political organization, also disseminated study information.
+
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
+
+Both members of each couple were informed of the risks and benefits of the study, gave consent, and participated at pre-adoptive placement (Time 1 or T1) and 2 years post-adoptive placement (T2). At each phase, they were sent a packet of questionnaires to complete and they were interviewed over the phone. Interviews lasted 1-1.5 hours.
+
+\hypertarget{measures}{%
+\subsection{Measures}\label{measures}}
+
+In the present study, we are investigating the Child Social Competence and Parental Values variables. Both are parental-report measures for which each partner in a dyad reported their perceptions of their own parental values and their child's social competence.
+The Child Social Competence measure (Conduct Problems Prevention Research Group, 1999) uses two subscales to assess different facets of socially competent behavior of children. It asks parents to rate the extent to which they believe statements describe their child on a 0-4 Likert scale ranging from \enquote{Not At All} to \enquote{Very Well.} The first subset consists of prosocial and communication skills, with items such as \enquote{Your child is very good at understanding other people's feelings,} and \enquote{Your child listens to others' points of view.} The second subset examines emotional regulation skills, such as \enquote{Your child can accept things not going his/her way,} and \enquote{Your child thinks before acting.} All 12 items of the Social Competence scale show significant reliability (alpha = 0.914). The Inter-class correlation for Social Competence shows that \textbf{\emph{find and interpret ICC here}}
+The Rank Order of Parental Values Scale (Kohn, 1977) orders self-directing (\enquote{to think for themselves}), conforming (\enquote{to be polite to adults}), and social (\enquote{to be kind to other children}) values in children. The scale is delivered to participants through three sets of five items, and there are a resulting 15 total items (6 self-directing, 6 conforming, 3 social). Parents rank each item on a five point Likert-scale from most important (1) to least important (5). Within the dataset, we only have access to the aggregate measures of each of the sets of items: self-direction, social, and conforming, but not the individual scores for each question. Each of these sets contain a different scale of scores, and thus we were unable to compute an alpha for internal validity. However this scale has been in use since the 1970s and is claimed to have consistent internal validity in many studies. It should be noted that the scale (Kohn, 1977) in its entirety was not found. However, sample items were referenced for use in this section, as well as \textbf{\emph{find and interpret ICC here }}
+
+\hypertarget{participant-demographics}{%
+\section{Participant Demographics}\label{participant-demographics}}
+
+The current study includes 89 couples, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
+
+Out of the 178 participants, 95 are female and 83 are male. The sample was also mostly comprised of white participants (92\%, n = 165). Average relationship length across the sample was 8.16 years and did not differ significantly between gender and couple type, F(2, 174) = 0.413, p = 0.66.
+
+The majority of the sample was well-educated. 18\% (n = 32) had a professional degree (PhD, JD, or MD), 43\% (n = 77) had a master's degree, 25\% (n = 45) had a bachelor's degree, 11\% (n = 20) had an associates degree or some college, and 1\% (n = 2) had a high school diploma. The education level did not differ significantly between couple types or gender, F(2, 173) = 0.506, p = 0.60.
+
+Ninety-one percent of couples adopted infants under the age of 3 (n = 162), 6.74\% adopted children between the ages of 3 and 6 years old (n = 12), and 2.25\% adopted children between 7 and 16 years old (n = 4). Child age at the time of the data collection did not differ significantly between couple types or gender, F(2, 174) = 1.64, p = 0.197. In total, 80.9\% of couples adopted though public domestic adoption (n = 144), 2.2\% adopted through private domestic adoption (n = 4), and 16.85\% adopted internationally (n = 30).
+
+Correlations between key variables by couple type and gender are described in \ref{tab:corrmatrix1} and \ref{tab:corrmatrix2}.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+
+\endgroup
+
+
+\end{document}

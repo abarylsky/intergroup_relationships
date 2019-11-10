@@ -1,0 +1,213 @@
+---
+title: "Alphas and ICCs"
+author: "Gav Bell"
+date: "11/6/2019"
+output: html_document
+---
+```{r}
+library(psysds364data)
+library(tidyr)
+library(dplyr)
+library(nlme)
+library(psysds364data)
+library(psych)
+```
+
+```{r}
+data("Goldberg_gav")
+```
+
+```{r variables}
+var_labels <- data.frame(column_name = colnames(Goldberg_gav),
+                         variable_label = sjlabelled::get_label(Goldberg_gav))
+
+Goldberg_gav_sm <- Goldberg_gav %>%
+  select(ID,
+         Partner,
+         group,
+         ChildAge,
+         chgend,
+         gendexp,
+         gender,
+         sexor,
+         w11RelDur,
+         contains("chrace"),
+         religion,
+         howrelig,
+         contains("otherch"),
+         occup,
+         contains("otherwork"),
+         educ,
+         faminc,
+         paraccme_5,
+         contains("polit"),
+         contains("gayaff"),
+         cityst,
+         contains("genderparent"),
+         sexor,
+         contains("myrace"),
+         contains("h12"),
+         contains("w12"),
+         h12social,
+         h12selfdir,
+         h12conform,
+         contains("soccomp"),
+         SocComp,
+         Prosocial,
+         Emotional
+         )
+
+```
+
+```{r subset_data}
+#exclude individuals who do not have data for parental values or social competence
+
+#find the subset of dyads who have information for both people for all of the variables
+Goldberg_gav_completes <- Goldberg_gav_sm %>%
+  filter(!is.na(SocComp) & !is.na(Prosocial) & !is.na(Emotional) & !is.na(h12social) & !is.na(h12selfdir) & !is.na(h12conform)) %>%
+  group_by(ID) %>%
+  count() %>%
+  filter(n == 2)
+
+#join this subset with the full set of individuals
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  inner_join(Goldberg_gav_completes, by = "ID")
+
+```
+
+```{r}
+Goldberg_gav_sm %>%
+  group_by(gender) %>%
+  count()
+
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  mutate(gender = ifelse(gender == 3, 1, gender))
+
+Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
+
+Goldberg_gav_sm %>%
+  group_by(gender) %>%
+  count()
+
+#impute ID 231 partner 2's relationship duration
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  mutate(w11RelDur = ifelse(ID == 231 & Partner == 2, 7.0, w11RelDur))
+  
+```
+
+Variables that we need for ICC:
+```{r}
+Goldberg_gav_small <- Goldberg_gav_sm %>%
+  select(ID,
+         Partner,
+         gender,
+         SocComp,
+         Prosocial,
+         Emotional,
+         h12social,
+         h12selfdir,
+         h12conform)
+```
+
+```{r}
+Goldberg_gav_small
+```
+## ICCs
+```{r}
+Goldberg_gav_soc <- gls(SocComp ~ 1,
+                     data = Goldberg_gav_small,
+                     correlation = corCompSymm(form=~1|ID),
+                     na.action = na.omit)
+```
+
+```{r}
+summary(Goldberg_gav_soc)
+Goldberg_gav_soc$sigma^2
+```
+Rho = 0.6742899 for Child Social Competence Social
+
+```{r}
+Goldberg_gav_pro <- gls(Prosocial ~ 1,
+                     data = Goldberg_gav_small,
+                     correlation = corCompSymm(form=~1|ID),
+                     na.action = na.omit)
+```
+
+```{r}
+summary(Goldberg_gav_pro)
+Goldberg_gav_pro$sigma^2
+```
+Rho = 0.5532034 for Child Social Competence Prosocial
+
+```{r}
+Goldberg_gav_emo <- gls(Emotional ~ 1,
+                     data = Goldberg_gav_small,
+                     correlation = corCompSymm(form=~1|ID),
+                     na.action = na.omit)
+```
+
+```{r}
+summary(Goldberg_gav_emo)
+Goldberg_gav_emo$sigma^2
+```
+Rho = 0.6684184 for Child Social Competence Emotional
+
+```{r}
+Goldberg_gav_h12soc <- gls(h12social ~ 1,
+                     data = Goldberg_gav_small,
+                     correlation = corCompSymm(form=~1|ID),
+                     na.action = na.omit)
+```
+
+```{r}
+summary(Goldberg_gav_h12soc)
+Goldberg_gav_h12soc$sigma^2
+```
+Rho = 0.1296929 for Parental Values Social
+
+```{r}
+Goldberg_gav_h12self <- gls(h12selfdir ~ 1,
+                     data = Goldberg_gav_small,
+                     correlation = corCompSymm(form=~1|ID),
+                     na.action = na.omit)
+```
+
+```{r}
+summary(Goldberg_gav_h12self)
+Goldberg_gav_h12self$sigma^2
+```
+Rho = 0.4276978 for Child Parental Values Self-Direction
+
+
+
+```{r}
+Goldberg_gav_h12conf <- gls(h12conform ~ 1,
+                     data = Goldberg_gav_small,
+                     correlation = corCompSymm(form=~1|ID),
+                     na.action = na.omit)
+```
+
+```{r}
+summary(Goldberg_gav_h12conf)
+Goldberg_gav_h12conf$sigma^2
+```
+Rho = 0.08294825 for Parental Values Conformity
+
+
+## Alphas
+```{r}
+socialcomp <- subset(Goldberg_gav_sm, select = c(soccomp_1, soccomp_2,soccomp_3,soccomp_4,soccomp_5,soccomp_6, soccomp_7, soccomp_8, soccomp_9, soccomp_10, soccomp_11, soccomp_12))
+```
+
+```{r}
+alpha(socialcomp, title='Alpha on Social Competence')
+```
+
+This is not going to be useful for us, it's here just as a reminder that it's useless.
+```{r}
+parentalvals <- subset(Goldberg_gav_sm, select = c(h12social, h12selfdir, h12conform))
+```
+
+```{r}
+alpha(parentalvals,title='Alpha on Parental Values')
+```

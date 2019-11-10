@@ -1,0 +1,279 @@
+---
+title             : "Measures and Descriptives Statistics"
+shorttitle        : "Measures and Descriptive Statistics"
+
+author: 
+  - name          : "Alina Barylsky"
+    affiliation   : "1"
+  - name          : "Gav Bell"
+    affiliation   : "1"
+  - name          : "Emma Livingston"
+    affiliation   : "1"
+  - name          : "Paige Salters"
+    affiliation   : "1"
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+  
+
+bibliography      : ["r-references.bib", "references.bib"]
+
+floatsintext      : no
+figsintext        : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_docx
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+options(tinytex.verbose = TRUE)
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+knitr::opts_chunk$set(include = FALSE, warning = FALSE, echo = FALSE)
+library(papaja)
+library(psysds364data)
+library(tidyverse)
+library(sjlabelled)
+library(psych)
+library(skimr)
+data("Goldberg_gav")
+```
+
+
+```{r define_subset}
+var_labels <- data.frame(column_name = colnames(Goldberg_gav),
+                         variable_label = sjlabelled::get_label(Goldberg_gav))
+
+Goldberg_gav_sm <- Goldberg_gav %>%
+  select(ID,
+         Partner,
+         group,
+         ChildAge,
+         chgend,
+         gendexp,
+         gender,
+         sexor,
+         w11RelDur,
+         contains("chrace"),
+         religion,
+         howrelig,
+         contains("otherch"),
+         occup,
+         contains("otherwork"),
+         educ,
+         faminc,
+         paraccme_5,
+         contains("polit"),
+         contains("gayaff"),
+         cityst,
+         contains("genderparent"),
+         sexor,
+         contains("myrace"),
+         contains("h12"),
+         contains("w12"),
+         h12social,
+         h12selfdir,
+         h12conform,
+         contains("soccomp"),
+         SocComp,
+         Prosocial,
+         Emotional
+         )
+
+#exclude individuals who do not have data for parental values or social competence
+
+#find the subset of dyads who have information for both people for all of the variables
+Goldberg_gav_completes <- Goldberg_gav_sm %>%
+  filter(!is.na(SocComp) & !is.na(Prosocial) & !is.na(Emotional) & !is.na(h12social) & !is.na(h12selfdir) & !is.na(h12conform)) %>%
+  group_by(ID) %>%
+  count() %>%
+  filter(n == 2)
+
+#join this subset with the full set of individuals
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  inner_join(Goldberg_gav_completes, by = "ID")
+```
+
+```{r impute_data}
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  mutate(gender = ifelse(gender == 3, 1, gender))
+
+Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
+
+#impute ID 231 partner 2's relationship duration
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  mutate(w11RelDur = ifelse(ID == 231 & Partner == 2, 7.0, w11RelDur))
+```
+
+```{r subset_by_group}
+lesbians <- Goldberg_gav_sm %>%
+  filter(group == 1)
+
+gays <- Goldberg_gav_sm %>%
+  filter(group == 2)
+
+straight_men <- Goldberg_gav_sm %>%
+  filter(group == 3 & gender == 2)
+
+straight_women <- Goldberg_gav_sm %>%
+  filter(group == 3 & gender == 1)
+```
+
+```{r counts_labels}
+counts_labels <- function(data, x) {
+  #if factor convert to numeric
+  dims <- dim(data)
+  counts <- data %>%
+    select_(x) %>%
+    group_by_(x) %>%
+    count_()
+  labels <- tibble(variable_label = 
+                     get_labels(data[[x]]))
+  data.table::setDT(labels, keep.rownames = TRUE)[]
+  labels$rn <- as.numeric(labels[,rn])
+  names(counts)[1] <- "x"
+  x_bins <- counts %>%
+    right_join(labels, by = c("x" = "rn"))
+  names(x_bins)[1] <- c(x, "n", "variable_label")
+  x_bins[["n"]][is.na(x_bins[["n"]])] <- 0
+  x_bins <- x_bins %>%
+    mutate(percent = round((n / dims[[1]]) * 100))
+  x_bins <- x_bins %>%
+    select(1, variable_label, everything())
+  return(x_bins)
+}
+```
+
+```{r sexor_counts}
+sexor_counts <- counts_labels(Goldberg_gav_sm, "sexor")
+```
+
+
+
+```{r kid_age}
+childage_at_adoption <- skim(Goldberg_gav_sm$h12Age)
+
+#under the age of 3
+infant_adoption <- Goldberg_gav_sm %>%
+  filter(Goldberg_gav_sm$h12Age < 36.00) %>%
+  count()
+
+#between 3 and 6
+little_child_adoption <- Goldberg_gav_sm %>%
+  filter(Goldberg_gav_sm$h12Age %in% (36.00:72.00)) #%>%
+  #count()
+
+#over the age of 7
+big_child_adoption <- Goldberg_gav_sm %>%
+  filter(Goldberg_gav_sm$h12Age > 72.00) #%>%
+  #count()
+
+summary(lm(formula =educ ~ gender + group, data = Goldberg_gav_sm))
+
+summary(lm(formula = educ ~ group + gender, data = Goldberg_gav_sm))
+
+summary(lm(formula = h12Age ~ group + gender, data = Goldberg_gav_sm))
+```
+
+```{r table_1}
+#Above the diagonal are lesbians, below the diagonal are gay males
+corr_matrix1 <- data.frame(tribble(
+  ~"", ~"Social Competence", ~"Prosocial Competence", ~"Emotional Competence", ~"Social Values", ~"Self-Direction Values", ~"Conformity Values",
+  "Social Competence",    "1.00",  "0.90*", "0.89*",  "0.09", "-0.01",  "0.19",
+  "Prosocial Competence", "0.93*",  "1.00",  "0.60*", "0.11", "-0.01",  "0.23",
+  "Emotional Competence", "0.95*", "0.76*",  "1.00",   "0.04", "-0.01",  "0.11",
+  "Social Values",      "0.10",   "0.04",  "0.15",   "1.00", "-0.33",   "0.07",
+  "Self-Direction Values","-0.06", "-0.07",  "0.05",  "-0.10",  "1.00", "-0.17",
+  "Conformity Values",    "0.31",  "0.36",  "0.22",    "0.04", "-0.22",   "1.00"
+  
+))
+
+#knitr::kable(corr_matrix1, caption = "Table 1: Correlations. Women in same-sex couples are above the diagonal, men in same-sex couples are below the diagonal.")
+```
+
+```{r table_2}
+#Above the diagonal are the straight women, below the diagonal are straight men
+corr_matrix2 <- data.frame(tribble(
+  ~"", ~"Social Competence", ~"Prosocial Competence", ~"Emotional Competence", ~"Social Values", ~"Self-Direction Values", ~"Conformity Values",
+  "Social Competence",    "1.00",  "0.92*", "0.92*",  "0.04", "0.03",  "-0.23",
+  "Prosocial Competence", "0.95*",  "1.00",  "0.70*", "-0.04", "0.11",  "-0.18",
+  "Emotional Competence", "0.93*", "0.76*",  "1.00",   "0.12", "-0.06",  "-0.24",
+  "Social Values",      "-0.23",   "-0.27",  "-0.15",  "1.00", "-0.22",  "0.16",
+  "Self-Direction Values", "0.28", "0.26",    "0.26",  "-0.20",  "1.00",  "-0.03",
+  "Conformity Values",    "-0.02",  "-0.08", "0.05",    "0.18", "0.21",      "1.00"
+  
+ ))
+#knitr::kable(corr_matrix2, caption = "Table 2: Correlations. Women in heterosexual couples are above the diagonal, men in heterosexual couples are below the diagonal.")
+```
+
+
+
+```{r corrmatrix1, results = "asis", echo = TRUE}
+apa_table(corr_matrix1, caption = "(ref:my-table1-caption)")
+```
+
+
+```{r corrmatrix2, results = "asis", echo = TRUE}
+apa_table(corr_matrix2, caption = "(ref:my-table2-caption)")
+```
+
+
+
+# Method
+
+## Participant Recruitment
+
+The data come from a larger longitudinal study on the transition to parenthood. To be included, couples had to be first time parents and adopting their first child. Adoption agencies across the US were asked to provide study information to clients seeking to adopt. Effort was made to contact agencies in states that had a high percentage of same-sex couples. Over 30 agencies provided information to clients; interested clients contacted the principal investigator for participation details. Both same-sex and heterosexual couples were targeted through these agencies to facilitate similarity on income and geographic location. Organizations such as the Human Rights Campaign, a gay political organization, also disseminated study information.
+
+## Procedure
+
+Both members of each couple were informed of the risks and benefits of the study, gave consent, and participated at pre-adoptive placement (Time 1 or T1) and 2 years post-adoptive placement (T2). At each phase, they were sent a packet of questionnaires to complete and they were interviewed over the phone. Interviews lasted 1-1.5 hours.
+
+## Measures
+
+In the present study, we are investigating the Child Social Competence and Parental Values variables. Both are parental-report measures for which each partner in a dyad reported their perceptions of their own parental values and their child’s social competence. 
+The Child Social Competence measure [@mcmahon1999initial] uses two subscales to assess different facets of socially competent behavior of children. It asks parents to rate the extent to which they believe statements describe their child on a 0-4 Likert scale ranging from “Not At All” to “Very Well.” The first subset consists of prosocial and communication skills, with items such as  “Your child is very good at understanding other people’s feelings,” and   “Your child listens to others’ points of view.” The second subset examines emotional regulation skills, such as “Your child can accept things not going his/her way,” and “Your child thinks before acting.” All 12 items of the Social Competence scale show significant reliability (alpha = 0.914). The Inter-class correlation for Social Competence shows that ***find and interpret ICC here*** 
+The Rank Order of Parental Values Scale [@kohn1977class] orders self-directing (“to think for themselves”), conforming (“to be polite to adults”), and social  (“to be kind to other children”) values in children. The scale is delivered to participants through three sets of five items, and there are a resulting 15 total items (6 self-directing, 6 conforming, 3 social). Parents rank each item on a five point Likert-scale from most important (1) to least important (5). Within the dataset, we only have access to the aggregate measures of each of the sets of items: self-direction, social, and conforming, but not the individual scores for each question. Each of these sets contain a different scale of scores, and thus we were unable to compute an alpha for internal validity. However this scale has been in use since the 1970s and is claimed to have consistent internal validity in many studies.  It should be noted that the scale [@kohn1977class] in its entirety was not found. However, sample items were referenced for use in this section, as well as   ***find and interpret ICC here ***
+
+
+
+# Participant Demographics
+
+The current study includes 89 couples, including 30 female same-sex couples, 24 male same-sex couples, and 35 heterosexual couples. The sample was determined by excluding any participants who did not have data for the primary variables of interest: Parental Values and Social Competence. Thus, any dyad that does not have information from both partners in the relevant variables was excluded.
+
+Out of the 178 participants, 95 are female and 83 are male. The sample was also mostly comprised of white participants (92%, n = 165). Average relationship length across the sample was 8.16 years and did not differ significantly between gender and couple type, F(2, 174) = 0.413, p  = 0.66.
+
+The majority of the sample was well-educated. 18% (n = 32) had a professional degree (PhD, JD, or MD), 43% (n = 77) had a master’s degree, 25% (n  = 45) had a bachelor’s degree, 11% (n = 20) had an associates degree or some college, and 1% (n = 2) had a high school diploma. The education level did not differ significantly between couple types or gender, F(2, 173) = 0.506, p = 0.60. 
+
+Ninety-one percent of couples adopted infants under the age of 3 (n = 162), 6.74% adopted children between the ages of 3 and 6 years old (n = 12), and 2.25% adopted children between 7 and 16 years old (n = 4). Child age at the time of the data collection did not differ significantly between couple types or gender, F(2, 174) = 1.64,  p = 0.197. In total, 80.9% of couples adopted though public domestic adoption (n = 144), 2.2% adopted through private domestic adoption (n = 4), and 16.85% adopted internationally (n = 30). 
+
+Correlations between key variables by couple type and gender are described in Table 1 and Table 2.
+
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
