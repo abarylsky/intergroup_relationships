@@ -1,0 +1,150 @@
+
+
+\documentclass[man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Annotated Bibliography},
+            pdfauthor={Emma Livingston},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{Annotated Bibliography}
+    \author{Emma Livingston\textsuperscript{1}}
+    \date{}
+  
+\shorttitle{SHORTTITLE}
+\affiliation{
+\vspace{0.5cm}
+\textsuperscript{1} Smith College}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
+
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\hypertarget{huber-plotner}{%
+\section{Huber \& Plotner}\label{huber-plotner}}
+
+Huber, Plötner, In-Albon, Stadelmann, and Schmitz (2019) studied social and emotional competence of preschoolers and the relationship to internalizing symptoms (withdrawal, anxiety, depression, etc.) and externalizing symptoms (aggressive and delinquent behavior). They studied n = 117 preschoolers, and their teachers (n = 109) and parents (n = 77). They were studying the hypothesized tripartite model as proposed by Perren and Malti, which has not been studied empirically in all of its four dimensions. They used Goodman's Strengths and Difficulties Questionnaire for the teachers and parents, the MeKKi Emotional Competence Inventory for Children, and Berkeley Puppet Interview by Measelle et al, and created linear models separately for teachers, parents, and children using the \texttt{lavaan} package. They found that collecting information from caregivers and children is critical in designing interventions in preschoolers. They found that prosocial behavior was negatively related to externalizing symptoms in teacher and parent reports, and in teacher reports a mediation effect of emotional competence via social competence was found for externalizing symptoms. Children reported internalizing symptoms being positively related to prosocial behavior, but not parents or teachers. Children's emotional competence was not found to be related to their interpersonal behavior. This study provides some insight into how social and emotional competence may have an impact on mental health, which would suggest that having a better understanding of what goes into social and emotional competence for children would be useful. This study can help us explain why our research is relevant and important.
+
+\hypertarget{jeon-neppl}{%
+\section{Jeon \& Neppl}\label{jeon-neppl}}
+
+In this paper, Jeon and Neppl (2019) examined the relationships between economic strain, parent positivity and positive parenting, and child social competence using the Actor-Partner Interdependence Model. The dyads were the mothers and fathers, so they were looking at how parents are affected differently by economic pressure, and how that as an impact on the child's social competence. They collected data at 3 different times. At Time 1 when the child was 2 years old, they measured economic pressure and social competence of the child. At Time 2 when the child was 3 or 4 years old, they measured maternal and paternal positivity and positive parenting for both parents. At Time 3 when the child was 5 years old, they measured child social competence. They used the Family Stress Model, and used a combination of scale surveys and observer ratings. Economic pressure negatively impacted maternal and paternal positivity at time 2. An interesting note is that maternal positivity was significantly related to mother positive parenting, but paternal positivity was not significantly related to the father's positive parenting. Parental positivity and positive parenting at time 2 were both related with the child's social competence at age 5 (time 3). Essentially, positivity and positive parenting from both parents are important in developing a child's social competence, even during economic pressure. Because this study uses the APIM, it is going to be an excellent reference for how to structure our paper. In my previous annotated bibliography I discussed the relationship between socioeconomic class, parental values, and parenting behavior. This serves as the rest of the theoretical connection between parental values and parent's perception of social competence of the child, as it discusses the relationship between the parent's positive parenting and the social competence of the child. We will need to investigate more how this relates to the parent perception of social competence.
+
+\hypertarget{jose-huntsinger-huntsinger}{%
+\section{Jose Huntsinger \& Huntsinger}\label{jose-huntsinger-huntsinger}}
+
+Jose, Huntsinger, Huntsinger, and Liaw (2000) looked at the differences between 40 preschool children from each of three cultural groups -- Chinese in Taiwan, first generation Chinese immigrants in the United States, and European Americans. They used a combination of questionnaires and interactions that were recorded on video and independently ranked to measure the parents' values related to their child, their behavior towards their child (such as in discipline) and the child's social competence. Chinese American parents were found to be more directive than European American parents, but equally warm towards their child. Both sets of Chinese parents exerted more control over their child. There was not an observed difference in social competence of the child between the three groups. The researchers wanted to look at the theorized differences between collectivist views and individualist views because of the cultural differences related to these viewpoints. Chinese parents consistently rated collectivist traits such as persistence, calmness, and politeness as more important than the European American parents did. This will be useful for our study because we can talk about how culture might be influencers of what a parent's values are, and how those are related to the parent's behaviors. Based on this experiment, as our study includes a majority of white American parents, we might expect to see higher levels of individualistic values than collectivist values.
+
+\hypertarget{oreilly-tokuno-ebata}{%
+\section{O'Reilly, Tokuno \& Ebata}\label{oreilly-tokuno-ebata}}
+
+O'Reilly, Tokuno, and Ebata (1986) studied differences in what parents valued most in the social competencies of their children, among Americans of European and Japanese descent in Hawaii. They theorized that culture has an influence on the values that parents have for their children. For example, they cited a study in which Japanese mothers perceived their infant as highly dependent, whereas European mothers encouraged their children to be independent from a very early age. The categories of social competencies used were: assertive, behaves well, open to experience, persistent, self-directed, sensitive to feelings, sociable, and tolerant. They interviewed 260 parents in their homes, and used multiple analysis of covariance, and included 2 way interactions. Japanese parents ranked \enquote{behaves well} highest, and European parents ranked \enquote{self-directed} the highest. This feels like a very similar study in the theory and results as that done by Jose, Huntsinger and Huntsinger. It will act as another resource in our study to discuss the importance of culture in parental values. However it likely will not impact the mechanics of our study because our subsample of the data is nearly entirely white.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-Huber2019}{}%
+Huber, L., Plötner, M., In-Albon, T., Stadelmann, S., \& Schmitz, J. (2019). The perspective matters: A multi-informant study on the relationship between social--emotional competence and preschoolers' externalizing and internalizing symptoms. \emph{Child Psychiatry and Human Development}, \emph{50}(6), 1021--1036. doi:\href{https://doi.org/10.1007/s10578-019-00902-8}{10.1007/s10578-019-00902-8}
+
+\leavevmode\hypertarget{ref-Jeon_Neppl_2019}{}%
+Jeon, S., \& Neppl, T. K. (2019). Economic pressure, parent positivity, positive parenting, and child social competence. \emph{Journal of Child and Family Studies}, \emph{28}(5), 1402--1412. doi:\href{https://doi.org/10.1007/s10826-019-01372-1}{10.1007/s10826-019-01372-1}
+
+\leavevmode\hypertarget{ref-Jose_Huntsinger_Huntsinger_Liaw_2000}{}%
+Jose, P. E., Huntsinger, C. S., Huntsinger, P. R., \& Liaw, F.-R. (2000). Parental values and practices relevant to young children's social development in taiwan and the united states. \emph{Journal of Cross-Cultural Psychology}, (6), 677--702. doi:\href{https://doi.org/10.1177/0022022100031006002}{10.1177/0022022100031006002}
+
+\leavevmode\hypertarget{ref-OReilly_Tokuno_Ebata_1986}{}%
+O'Reilly, J. P., Tokuno, K. A., \& Ebata, A. T. (1986). Cultural differences between americans of japanese and european ancestry in parental valuing of social competence. \emph{Journal of Comparative Family Studies}, \emph{17}(1), 87--97.
+
+\endgroup
+
+
+\end{document}

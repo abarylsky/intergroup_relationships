@@ -1,0 +1,69 @@
+---
+title             : "Annotated Bibliography"
+
+author: 
+  - name          : "Emma Livingston"
+    affiliation   : "1"
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+
+
+bibliography      : ["r-references.bib", "references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+# Huber & Plotner
+
+@Huber2019 studied social and emotional competence of preschoolers and the relationship to internalizing symptoms (withdrawal, anxiety, depression, etc.) and externalizing symptoms (aggressive and delinquent behavior). They studied n = 117 preschoolers, and their teachers (n = 109) and parents (n = 77).  They were studying the hypothesized tripartite model as proposed by Perren and Malti, which has not been studied empirically in all of its four dimensions. They used Goodman’s Strengths and Difficulties Questionnaire for the teachers and parents, the MeKKi Emotional Competence Inventory for Children, and Berkeley Puppet Interview by Measelle et al, and created linear models separately for teachers, parents, and children using the `lavaan` package.  They found that collecting information from caregivers and children is critical in designing interventions in preschoolers. They found that prosocial behavior was negatively related to externalizing symptoms in teacher and parent reports, and in teacher reports a mediation effect of emotional competence via social competence was found for externalizing symptoms. Children reported internalizing symptoms being positively related to prosocial behavior, but not parents or teachers. Children’s emotional competence was not found to be related to their interpersonal behavior. This study provides some insight into how social and emotional competence may have an impact on mental health, which would suggest that having a better understanding of what goes into social and emotional competence for children would be useful. This study can help us explain why our research is relevant and important. 
+
+# Jeon & Neppl
+
+In this paper, @Jeon_Neppl_2019 examined the relationships between economic strain, parent positivity and positive parenting, and child social competence using the Actor-Partner Interdependence Model. The dyads were the mothers and fathers, so they were looking at how parents are affected differently by economic pressure, and how that as an impact on the child’s social competence. They collected data at 3 different times. At Time 1 when the child was 2 years old, they measured economic pressure and social competence of the child. At Time 2 when the child was 3 or 4 years old, they measured maternal and paternal positivity and positive parenting for both parents. At Time 3 when the child was 5 years old, they measured child social competence. They used the Family Stress Model, and used a combination of scale surveys and observer ratings. Economic pressure negatively impacted maternal and paternal positivity at time 2. An interesting note is that maternal positivity was significantly related to mother positive parenting, but paternal positivity was not significantly related to the father’s positive parenting. Parental positivity and positive parenting at time 2 were both related with the child’s social competence at age 5 (time 3).  Essentially, positivity and positive parenting from both parents are important in developing a child’s social competence, even during economic pressure. Because this study uses the APIM, it is going to be an excellent reference for how to structure our paper. In my previous annotated bibliography I discussed the relationship between socioeconomic class, parental values, and parenting behavior. This serves as the rest of the theoretical connection between parental values and parent’s perception of social competence of the child, as it discusses the relationship between the parent’s positive parenting and the social competence of the child. We will need to investigate more how this relates to the parent perception of social competence.
+
+# Jose Huntsinger & Huntsinger
+
+@Jose_Huntsinger_Huntsinger_Liaw_2000 looked at the differences between 40 preschool children from each of three cultural groups – Chinese in Taiwan, first generation Chinese immigrants in the United States, and European Americans. They used a combination of questionnaires and interactions that were recorded on video and independently ranked to measure the parents’ values related to their child, their behavior towards their child (such as in discipline) and the child’s social competence. Chinese American parents were found to be more directive than European American parents, but equally warm towards their child. Both sets of Chinese parents exerted more control over their child. There was not an observed difference in social competence of the child between the three groups. The researchers wanted to look at the theorized differences between collectivist views and individualist views because of the cultural differences related to these viewpoints. Chinese parents consistently rated collectivist traits such as persistence, calmness, and politeness as more important than the European American parents did. This will be useful for our study because we can talk about how culture might be influencers of what a parent’s values are, and how those are related to the parent’s behaviors. Based on this experiment, as our study includes a majority of white American parents, we might expect to see higher levels of individualistic values than collectivist values. 
+
+# O’Reilly, Tokuno & Ebata
+
+@OReilly_Tokuno_Ebata_1986 studied differences in what parents valued most in the social competencies of their children, among Americans of European and Japanese descent in Hawaii. They theorized that culture has an influence on the values that parents have for their children. For example, they cited a study in which Japanese mothers perceived their infant as highly dependent, whereas European mothers encouraged their children to be independent from a very early age. The categories of social competencies used were: assertive, behaves well, open to experience, persistent, self-directed, sensitive to feelings, sociable, and tolerant. They interviewed 260 parents in their homes, and used multiple analysis of covariance, and included 2 way interactions. Japanese parents ranked “behaves well” highest, and European parents ranked “self-directed” the highest. This feels like a very similar study in the theory and results as that done by Jose, Huntsinger and Huntsinger. It will act as another resource in our study to discuss the importance of culture in parental values. However it likely will not impact the mechanics of our study because our subsample of the data is nearly entirely white.
+
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
