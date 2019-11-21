@@ -1,0 +1,99 @@
+---
+title             : "Introduction"
+shorttitle        : "Introduction"
+
+author: 
+  - name          : "Alina Barylsky"
+    affiliation   : "1"
+  - name          : "Gav Bell"
+    affiliation   : "1"
+  - name          : "Emma Livingston"
+    affiliation   : "1"
+  - name          : "Paige Salters"
+    affiliation   : "1"
+    
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+
+
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib", "references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+Psychological research regarding parenting is an extensive and growing field of study. There are numerous factors impacting intercouple interactions as well as the relationship established with their child. The values that the parents hold are likely to be based on their own individual values as parents, in addition to the couple’s gender composition. Each couple type and gender composition give rise to unique social positions that work to inform parental values from different perspectives. These values then have the potential to influence the way parents interact with, and perceive, their children. Previous research has suggested that the beliefs and actions of parents likely impacts their children in a variety of ways [@grusec2007parents], however there are no studies to date that examine the ways in which parental values are explained by parents’ gender and sexual orientation, and how those in turn impact their perception of their child’s social competence. The present study attempted to fill this gap in the research by examining the mechanisms through which adoptive parents’ couple type and gender influenced the values they held, as well as the way this shaped perceptions of their child’s social competence. We examined the interaction between parents’ gender and sexual orientation and that relationship with the values they held as parents, and how those values moderated their perception of the child’s social competence.
+  
+## Parental Values
+
+A variety of research has examined how the values that parents hold impact their children. These parental values are often influenced by culture and background. For example, parents from collectivist cultures were more likely to value traits such as behaving well, persistence, calmness, and politeness more highly than parents from individualistic cultures [@OReilly_Tokuno_Ebata_1986; @Jose_Huntsinger_Huntsinger_Liaw_2000]. Parental values regarding self-direction in their children were found to be explained by the education of the parents, and to a lesser extent, occupational prestige [@wright_wright_1976]. Past research regarding parental values has also found that variance in values are related to different parenting behaviors, which in turn have separate impacts on the children. @Luster_Rhoades_Haas_1989 found that a parent who valued conformity was more likely to restrict the child’s movement in the home, and was less likely to give attention to the child when they fussed or cried, whereas a parent who valued self-direction was more likely to allow the child to move freely in the house and be warm towards the child. Furthermore, when examining same-sex couples, mothers were more likely to value behaviors falling into both individualistic and collectivistic categories than fathers [@bigras2012differential]. Expanding on this research, we examined how gender and couple type impact the values they desire in their children. 
+  
+## Social Competence 	
+
+Social competence is often considered to be a fundamental skill developed during critical stages of childhood [@missal2008critical]. While social competence has been defined as effectiveness in interaction, and the result of organized behaviors that meet short and long term developmental needs [@Denham_2003]. It’s commonly considered to be composed of elements including comprehending emotions, social skills, and conduct problems [@webster1999social]. When applied to the way parents perceived social competence in their children, prosocial and communication skills are emphasized as competent skills that children displayed on a continuum.
+  
+Literature about social competence in children included studies revealing the significance of attachment style, particularly in mothers, in child social competence [@barone2017matter]. Other predictors of child socio-emotional competence included parenting style [@zarra2014social], coparenting cooperation [@Lam_Tam_Chung_Li_2018], gender of children [@walker2005gender, @spruijt2018linking], age of children [@walker2005gender], parental reactions towards children expressing emotions and parental expressions of emotions [@Jeon_Neppl_2019, @denham1997parental]. A study by @walker2005gender found a relationship between social competence and Theory-of-Mind development, a critical skill developed with age. Because social competence in children is considered to be engendered in accordance with developmental stages, parents may be cognisant of what values they seek for their children to internalize and, consequently, pay attention to how they believe and perceive their child to be developing. 
+
+Social competence has been studied using a variety of methods: teacher reports, observational studies in labs and in home settings, and child self-report measures. Previous studies have used parent-reports to measure child social competence, without accounting for the biases parents may hold [@ren2015pathways]. @gresham2018cross found that parent and teacher reports of child social competence were highly correlated, but were less correlated with child reports. Several other studies have pointed to this problem within measuring child social competence [@meade2001stress; webster1999social]. To avoid these discrepancies in present child social competence measures, we utilized a parent-report method to examine the parental perception of child’s social competence.
+
+Parenting style and affect have often been associated with the development of social competence in children [@ren2015pathways; @zarra2014social]. However, while growing support of queer theory and policy uphold the notion that same sex couple types promote an improved sense of self-actualization in children, a child’s social competence did not vary significantly between those raised in traditional and same-sex households [@potter2017psychosocial; @walker2005gender]. @drexler2001moral analyzed the effect of lesbian parenting on the development of young boys’ moral reasoning. No significant difference was found in moral reasoning behaviour of sons raised in lesbian and heterosexual families. However, we anticipated that given the differences in values of self-direction between couple type and gender, lesbian parents and gay male parents will perceive higher social competence in their children than heterosexual parents would of their children. 
+
+## The Current Study
+
+The present study examined how gender and couple type (i.e., same-sex women, same-sex men, and heterosexual couples) of adoptive parents influenced the values they held, and how these values in turn informed parents’ perceptions of their child’s social competence. Although it has been demonstrated that there is an extensive body of research examining various relationships between constructs surrounding parenting and child outcomes, there are several gaps in this research that the current study aimed to address. 
+
+Primarily, research that examined parental values and child social competence has often viewed the relationship between the two as directly associated, or more commonly, as moderated by some form of parental behavior such as positivity or cooperation [@Jeon_Neppl_2019; @Lam_Tam_Chung_Li_2018; @Luster_Rhoades_Haas_1989] or subject variable, like child gender [@walker2005gender]. Our study proposed a new model in which parental values are viewed as a moderating variable between gender and couple type and how they inform the parents’ perception of the child’s social competence. 
+
+The body of research that informed the present study highlighted the importance of examining the role of parents’ couple type in addition to gender when considering children’s social development. For example, @potter2017psychosocial utilized longitudinal analyses to make evident the mediating effect of familial transitions over time in nontraditional family structures, including families with same-sex parents. In their study, there was no difference in children’s psychosocial wellbeing when differences resulting from couple type were accounted for. In the review of the literature for both parental values and social competence, when the gender and partnership type of the parents were included in models, they were consistently positioned as partial predictors or moderators of parental behavior. Alternatively, our study positioned the combination of these components of identity as the predictor.
+
+The data used for our study brought particular emphasis to the lack of research that accounts for a variety of couple types and the ways that family and psychological infrastructure influence child social development. In researching families with adopted children, the dataset created a means for discussion of nature versus nurture, ideologies that have been present in psychological research for nearly as long as the field has existed. The fact that all children in our data were adopted allows us to effectively discount the role of nature, meaning biological or genetic inheritance between parents and children. Because of this, we considered the role of nature to be randomized across all adoptive children of the participants, thereby interpreting the effects we are seeing as solely due to nurture. 
+
+Additionally, a majority of studies in our literature review constructed variables concerning children’s social competence as its own variable, rather than considering how parent’s perceptions of their children’s social competence may be influenced by implicit biases. Consequently, this leaves to question the efficacy of parental report measures as indicative of a child’s experience. 
+
+Finally, our use of a dyadic model with moderation allows for a more nuanced investigation into the relationships that inform the production of parental values and those that influence a parent’s perception of their child’s social competence. Previous literature such as @Denham_2003 and @Jeon_Neppl_2019 have utilized a dyadic approach to studying social competence, but this methodology has not been as frequently applied in the study of parental values. 
+
+## Hypotheses
+
+In this study, we hypothesized that parents valuing self-direction more highly would be associated with a perception of better social competence in their children. We also hypothesized that lesbian couples and gay male couples would value self-direction more highly than their heterosexual counterparts. Further, we hypothesized that due to the differences in values of self-direction between couple type and gender, lesbian and gay male parents would perceive higher social competence in their children than heterosexual parents of their children. We studied the impacts of the gender and sexual orientation of one parent and their partner on the values of the individual parents, and in turn how these influence individual perception of the child’s social competence. We do not have a theoretical basis for a directional hypothesis because of the lack of research that has been done connecting parental values and social competence using the actor-partner interdependence model. 
+
+
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
