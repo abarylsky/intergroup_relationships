@@ -1,0 +1,51 @@
+---
+title: "Data Wrangling"
+author: "Emma Livingston"
+date: "11/25/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(psysds364data)
+```
+
+
+```{r select_variables}
+Goldberg_gav_sm <- Goldberg_gav %>%
+  select(ID,
+         Partner,
+         group,
+         gender,
+         h12selfdir,
+         SocComp
+         )
+```
+
+```{r subset_data}
+#exclude individuals who do not have data for parental values or social competence
+
+#find the subset of dyads who have information for both people for all of the variables
+Goldberg_gav_completes <- Goldberg_gav_sm %>%
+  filter(!is.na(SocComp) & !is.na(h12selfdir)) %>%
+  group_by(ID) %>%
+  count() %>%
+  filter(n == 2)
+
+#join this subset with the full set of individuals
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  inner_join(Goldberg_gav_completes, by = "ID")
+```
+
+
+```{r impute_data}
+#impute gender 3 to gender 1
+Goldberg_gav_sm <- Goldberg_gav_sm %>%
+  #mutate(w11RelDur = ifelse(ID == 231 & Partner == 2, 7.0, w11RelDur)) %>%
+  mutate(gender = ifelse(gender == 3, 1, gender))
+
+#NA gender goes to 1
+Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
+```
+
