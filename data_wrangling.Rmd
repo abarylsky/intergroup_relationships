@@ -49,3 +49,20 @@ Goldberg_gav_sm <- Goldberg_gav_sm %>%
 Goldberg_gav_sm$gender[is.na(Goldberg_gav_sm$gender)] <- 1
 ```
 
+```{r}
+#Impute partner number for second person in dyad 53:
+Goldberg_gav_sm[38, 2] = 2
+#Impute partner number for second person in dyad 247:
+Goldberg_gav_sm[153, 2] = 1
+
+#Pairwise data
+goldberg_sm_pairwise <- Goldberg_gav_sm %>%
+  mutate(Partner = case_when(Partner == 1 ~ "A",
+                              Partner == 2 ~ "B")) %>%
+  select(-n, -gender, group) %>%
+  gather(variable, value, h12selfdir:SocComp) %>%
+  unite(var_partner, variable, Partner) %>%
+  spread(var_partner, value)
+
+head(goldberg_sm_pairwise)
+```
