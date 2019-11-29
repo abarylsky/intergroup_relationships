@@ -55,14 +55,35 @@ Goldberg_gav_sm[38, 2] = 2
 #Impute partner number for second person in dyad 247:
 Goldberg_gav_sm[153, 2] = 1
 
-#Pairwise data
-goldberg_sm_pairwise <- Goldberg_gav_sm %>%
-  mutate(Partner = case_when(Partner == 1 ~ "A",
-                              Partner == 2 ~ "B")) %>%
-  select(-n, -gender, group) %>%
-  gather(variable, value, h12selfdir:SocComp) %>%
+# Pairwise data
+tempA <- Goldberg_gav_sm %>%
+  mutate(
+    genderE = gender,
+    partnum = 1,
+    Partner = case_when(
+      Partner == 1 ~ "A",
+      Partner == 2 ~ "P")) %>%
+  select(-n) %>%
+  gather(variable, value, group:genderE) %>%
   unite(var_partner, variable, Partner) %>%
   spread(var_partner, value)
 
-head(goldberg_sm_pairwise)
+tempB <- Goldberg_gav_sm %>%
+  mutate(
+    genderE = gender,
+    partnum = 2,
+    Partner = case_when(
+      Partner == 1 ~ "P",
+      Partner == 2 ~ "A")) %>%
+  select(-n, -gender, group) %>%
+  gather(variable, value, group:genderE) %>%
+  unite(var_partner, variable, Partner) %>%
+  spread(var_partner, value)
+
+Goldberg_gav_pairwise <- bind_rows(tempA, tempB) %>%
+  select(-gender_A, -gender_P, -group_P) %>%
+  rename(group = group_A) %>%
+  arrange(ID)
+
+
 ```
