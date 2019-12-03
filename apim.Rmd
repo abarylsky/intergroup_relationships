@@ -1,0 +1,185 @@
+---
+title: "APIM"
+author: "Emma Livingston"
+date: "11/29/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(psysds364data)
+library(tidyverse)
+library(psych)
+library(nlme)
+library(mosaic)
+
+```
+
+Run the data_wrangling.Rmd so you have `pairwise` in your environment.
+
+# Basic model
+
+## Indistinguishable Dyads
+
+Here we have a model where gender of the actor and gender of the partner predict the perceived social competence of the child for the actor. 
+
+I attempted to create a model where the gender of the actor and the gender of the partner are interacted with group (so that we have gender and sexual orientation in the model), but I get an error (Error in glsEstimate(object, control = control) : computed "gls" fit is singular, rank 5).
+
+```{r baseline_model}
+apim <- gls(soc_comp_a ~ gender_e_a + gender_e_p,
+            data = pairwise,
+            correlation = corCompSymm(form = ~1|id),
+            na.action = na.omit)
+
+summary(apim)
+
+apim_intact <- gls(soc_comp_a ~ gender_e_a:group + gender_e_p:group,
+            data = pairwise,
+            correlation = corCompSymm(form = ~1|id),
+            na.action = na.omit)
+
+summary(apim_intact)
+```
+
+ICC just gender: 0.6747253
+ICC gender and group: 0.6775821
+
+## Calculate R^2^
+
+Calculate R-squared by taking the SSE of the model, dividing by the SSE of the empty model, and subtracting that from 1. Our baseline model does very very poorly. 
+
+```{r apim_empty}
+apim_empty <- gls(soc_comp_a ~ 1,
+                  data = pairwise,
+                  correlation = corCompSymm(form = ~1|id),
+                  na.action = na.omit)
+summary(apim_empty)
+
+r2_gender <- 1-(apim$sigma^2/apim_empty$sigma^2)
+r2_gender
+```
+
+```{r r2_intact}
+r2_intact <- 1 - (apim_intact$sigma^2/apim_empty$sigma^2)
+r2_intact
+```
+yikes this isn't going well
+
+## Interpretation of Model Estimates
+
+* *Intercept*: meaningless because not centered
+
+* *actor variable*: I truly don't understand how to interpret this right now
+
+* *partner variable*:
+ 
+
+# Moderator 
+
+We first center the moderator and predictor variables:
+
+```{r}
+pairwise <- pairwise %>%
+  mutate(h12selfdir_a_ctr = h12selfdir_a - mean(h12selfdir_a),
+         h12selfdir_p_ctr = h12selfdir_p - mean(h12selfdir_p),
+         soc_comp_a_ctr = soc_comp_a - mean(soc_comp_a),
+         soc_comp_p_ctr = soc_comp_p - mean(soc_comp_p))
+
+pairwise <- pairwise %>%
+  mutate(samesex = ifelse(group == 1 | group == 2, 1, 0))
+
+```
+
+We then estimate the two-intercept model:
+
+```{r}
+moderation <- gls(soc_comp_a ~ 
+                    h12selfdir_a_ctr:gender_e_a:group +
+                    h12selfdir_a_ctr:gender_e_p:group +
+                    h12selfdir_p_ctr:gender_e_a:group +
+                    h12selfdir_p_ctr:gender_e_p:group,
+                  data = pairwise,
+                  correlation = corCompSymm(form = ~1|id),
+                  na.action = na.omit)
+
+summary(moderation)
+coef(summary(moderation))
+
+# #Randi added
+# #actor gender by partner gender
+# moderation <- gls(soc_comp_a ~ gender_e_a:gender_e_p +
+#                     h12selfdir_a_ctr:gender_e_a:gender_e_p +
+#                     h12selfdir_p_ctr:gender_e_p:gender_e_p,
+#                   data = pairwise,
+#                   correlation = corCompSymm(form = ~1|id),
+#                   na.action = na.omit)
+# 
+# summary(moderation)
+# coef(summary(moderation))
+# 
+# #actor gender by samesex (indicator variable)
+# moderation <- gls(soc_comp_a ~ gender_e_a:samesex +
+#                     h12selfdir_a_ctr:gender_e_a:samesex +
+#                     h12selfdir_p_ctr:gender_e_p:samesex,
+#                   data = pairwise,
+#                   correlation = corCompSymm(form = ~1|id),
+#                   na.action = na.omit)
+# 
+# summary(moderation)
+# coef(summary(moderation))
+
+#simply use the group variable
+moderation <- gls(soc_comp_a ~ group +
+                    h12selfdir_a_ctr:group +
+                    h12selfdir_p_ctr:group,
+                  data = pairwise,
+                  correlation = corCompSymm(form = ~1|id),
+                  na.action = na.omit)
+
+summary(moderation)
+coef(summary(moderation))
+```
+
+```{r}
+pairwise <- pairwise %>%
+  mutate(h12selfdir_a_ctrhigh = h12selfdir_a_ctr - sd(h12selfdir_a_ctr),
+         h12selfdir_p_ctrhigh = h12selfdir_p_ctr - sd(h12selfdir_p_ctr),
+         h12selfdir_a_ctrlow = h12selfdir_a_ctr + sd(h12selfdir_a_ctr),
+         h12selfdir_p_ctrlow = h12selfdir_p_ctr + sd(h12selfdir_p_ctr))
+
+```
+
+```{r}
+a_high <- gls(soc_comp_a ~ group +
+                h12selfdir_a_ctrhigh:group +
+                h12selfdir_p_ctr:group,
+              data = pairwise,
+              correlation = corCompSymm(form = ~1|id))
+
+coef(summary(a_high))
+
+a_low <- gls(soc_comp_a ~ group +
+                h12selfdir_a_ctrlow:group +
+                h12selfdir_p_ctr:group,
+              data = pairwise,
+              correlation = corCompSymm(form = ~1|id))
+
+coef(summary(a_low))
+
+p_high <- gls(soc_comp_a ~ group +
+                h12selfdir_a_ctr:group +
+                h12selfdir_p_ctrhigh:group,
+              data = pairwise,
+              correlation = corCompSymm(form = ~1|id))
+
+coef(summary(p_high))
+
+p_low <- gls(soc_comp_a ~ group +
+                h12selfdir_a_ctr:group +
+                h12selfdir_p_ctrlow:group,
+              data = pairwise,
+              correlation = corCompSymm(form = ~1|id))
+
+coef(summary(p_low))
+```
+

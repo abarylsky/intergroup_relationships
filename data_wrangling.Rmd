@@ -80,10 +80,11 @@ tempB <- Goldberg_gav_sm %>%
   unite(var_partner, variable, Partner) %>%
   spread(var_partner, value)
 
-Goldberg_gav_pairwise <- bind_rows(tempA, tempB) %>%
+pairwise <- bind_rows(tempA, tempB) %>%
   select(-gender_A, -gender_P, -group_P) %>%
   rename(group = group_A) %>%
-  arrange(ID)
+  arrange(ID) %>%
+  janitor::clean_names()
 
 
 ```
