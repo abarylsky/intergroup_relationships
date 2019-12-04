@@ -93,17 +93,17 @@ pairwise <- pairwise %>%
 We then estimate the two-intercept model:
 
 ```{r}
-moderation <- gls(soc_comp_a ~ 
-                    h12selfdir_a_ctr:gender_e_a:group +
-                    h12selfdir_a_ctr:gender_e_p:group +
-                    h12selfdir_p_ctr:gender_e_a:group +
-                    h12selfdir_p_ctr:gender_e_p:group,
-                  data = pairwise,
-                  correlation = corCompSymm(form = ~1|id),
-                  na.action = na.omit)
-
-summary(moderation)
-coef(summary(moderation))
+# moderation <- gls(soc_comp_a ~ 
+#                     h12selfdir_a_ctr:gender_e_a:group +
+#                     h12selfdir_a_ctr:gender_e_p:group +
+#                     h12selfdir_p_ctr:gender_e_a:group +
+#                     h12selfdir_p_ctr:gender_e_p:group,
+#                   data = pairwise,
+#                   correlation = corCompSymm(form = ~1|id),
+#                   na.action = na.omit)
+# 
+# summary(moderation)
+# coef(summary(moderation))
 
 # #Randi added
 # #actor gender by partner gender
@@ -129,16 +129,69 @@ coef(summary(moderation))
 # coef(summary(moderation))
 
 #simply use the group variable
-moderation <- gls(soc_comp_a ~ group +
-                    h12selfdir_a_ctr:group +
-                    h12selfdir_p_ctr:group,
+moderation <- gls(soc_comp_a ~ as.factor(group) +
+                    h12selfdir_a_ctr:as.factor(group) +
+                    h12selfdir_p_ctr:as.factor(group) - 1,
                   data = pairwise,
                   correlation = corCompSymm(form = ~1|id),
                   na.action = na.omit)
 
 summary(moderation)
 coef(summary(moderation))
+
+moderation <- gls(soc_comp_a ~ as.factor(samesex) +
+                    h12selfdir_a_ctr:as.factor(samesex) +
+                    h12selfdir_p_ctr:as.factor(samesex) - 1,
+                  data = pairwise,
+                  correlation = corCompSymm(form = ~1|id),
+                  na.action = na.omit)
+
+summary(moderation)
+coef(summary(moderation))
+
+moderation <- gls(soc_comp_a ~ h12selfdir_a_ctr*as.factor(samesex) +
+                    h12selfdir_p_ctr*as.factor(samesex),
+                  data = pairwise,
+                  correlation = corCompSymm(form = ~1|id),
+                  na.action = na.omit)
+
+summary(moderation)
+
+coef(summary(moderation))
 ```
+
+```{r conformity}
+# moderation <- gls(soc_comp_a ~ as.factor(group) +
+#                     h12conform_a_ctr:as.factor(group) +
+#                     h12conform_p_ctr:as.factor(group) - 1,
+#                   data = pairwise,
+#                   correlation = corCompSymm(form = ~1|id),
+#                   na.action = na.omit)
+# 
+# summary(moderation)
+# coef(summary(moderation))
+# 
+# moderation <- gls(soc_comp_a ~ as.factor(samesex) +
+#                     h12conform_a_ctr:as.factor(samesex) +
+#                     h12conform_p_ctr:as.factor(samesex) - 1,
+#                   data = pairwise,
+#                   correlation = corCompSymm(form = ~1|id),
+#                   na.action = na.omit)
+# 
+# summary(moderation)
+# coef(summary(moderation))
+# 
+# moderation <- gls(soc_comp_a ~ h12conform_a_ctr*as.factor(samesex) +
+#                     h12conform_p_ctr*as.factor(samesex),
+#                   data = pairwise,
+#                   correlation = corCompSymm(form = ~1|id),
+#                   na.action = na.omit)
+# 
+# summary(moderation)
+# 
+# coef(summary(moderation))
+```
+
 
 ```{r}
 pairwise <- pairwise %>%
@@ -150,36 +203,36 @@ pairwise <- pairwise %>%
 ```
 
 ```{r}
-a_high <- gls(soc_comp_a ~ group +
-                h12selfdir_a_ctrhigh:group +
-                h12selfdir_p_ctr:group,
+a_high <- gls(soc_comp_a ~ as.factor(group) +
+                h12selfdir_a_ctrhigh:as.factor(group) +
+                h12selfdir_p_ctr:as.factor(group) - 1,
               data = pairwise,
               correlation = corCompSymm(form = ~1|id))
 
-coef(summary(a_high))
+summary(a_high)
 
-a_low <- gls(soc_comp_a ~ group +
-                h12selfdir_a_ctrlow:group +
-                h12selfdir_p_ctr:group,
+a_low <- gls(soc_comp_a ~ as.factor(group) +
+                h12selfdir_a_ctrlow:as.factor(group) +
+                h12selfdir_p_ctr:as.factor(group) - 1,
               data = pairwise,
               correlation = corCompSymm(form = ~1|id))
 
-coef(summary(a_low))
+summary(a_low)
 
-p_high <- gls(soc_comp_a ~ group +
-                h12selfdir_a_ctr:group +
-                h12selfdir_p_ctrhigh:group,
+p_high <- gls(soc_comp_a ~ as.factor(group) +
+                h12selfdir_a_ctr:as.factor(group) +
+                h12selfdir_p_ctrhigh:as.factor(group) - 1,
               data = pairwise,
               correlation = corCompSymm(form = ~1|id))
 
-coef(summary(p_high))
+summary(p_high)
 
-p_low <- gls(soc_comp_a ~ group +
-                h12selfdir_a_ctr:group +
-                h12selfdir_p_ctrlow:group,
+p_low <- gls(soc_comp_a ~ as.factor(group) +
+                h12selfdir_a_ctr:as.factor(group) +
+                h12selfdir_p_ctrlow:as.factor(group) - 1 ,
               data = pairwise,
               correlation = corCompSymm(form = ~1|id))
 
-coef(summary(p_low))
+summary(p_low)
 ```
 

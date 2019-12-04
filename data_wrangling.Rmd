@@ -19,6 +19,7 @@ Goldberg_gav_sm <- Goldberg_gav %>%
          group,
          gender,
          h12selfdir,
+         #h12conform,
          SocComp
          )
 ```
